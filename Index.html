@@ -555,8 +555,34 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #1f2937;
+}
 
-
+/* Responsive Quote Adjustment */
+@media (max-width: 768px) {
+  .hero-quote {
+    position: relative !important;
+    top: auto !important;
+    margin-bottom: 2rem;
+  }
+}
 
 </style>
 </head>
@@ -602,74 +628,65 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="hero-bg min-h-screen flex items-center pt-16 hero-text opacity-0 translate-y-6 transition-all duration-1000 ease-out delay-300" id="home">
-  <div class="container mx-auto px-4 py-16">
-    <div class="flex flex-col md:flex-row items-center relative">
+<section class="hero-bg min-h-screen" id="home">
+  <div class="container mx-auto px-4 pt-24 relative">
 
-      <!-- Left Content -->
-      <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0 z-10">
+    <!-- Swami Vivekananda Quote -->
+    <div class="hero-quote w-full text-center mb-6 md:mb-10 z-20">
+      <p class="text-white text-lg md:text-xl lg:text-2xl font-semibold tracking-wide italic opacity-90 leading-snug">
+        “Arise, awake, and stop not till the goal is reached”
+      </p>
+      <p class="text-white text-sm md:text-base opacity-70 mt-2">
+        — Swami Vivekananda
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center">
+      <!-- Left Text Section -->
+      <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
           <span class="block">Hi, I'm</span>
           <span class="gradient-text">Soham Patel</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+        <p class="text-xl md:text-2xl text-gray-300 mb-6">
           CA Finalist &amp; Tech Enthusiast
         </p>
-        <p class="text-gray-300 mb-8 max-w-lg">
+        <p class="text-gray-300 mb-6 max-w-lg mx-auto md:mx-0">
           Bridging the gap between finance and technology with expertise in Audits, Compliance, Litigation, Taxation and a passion for innovative tech solutions.
         </p>
-<!-- Mobile Quote (visible only on small screens) -->
-<div class="block md:hidden w-full text-center mb-6 px-4">
-  <p class="text-white text-base font-semibold italic leading-snug">
-    “Arise, awake, and stop not till the goal is reached”
-  </p>
-  <p class="text-white text-xs opacity-70 mt-1">
-    — Swami Vivekananda
-  </p>
-</div>
-
         <div class="flex flex-wrap gap-4 justify-center md:justify-start">
           <a class="btn-gradient px-8 py-3 rounded-full font-medium" href="#contact">Get In Touch</a>
           <a class="btn-gradient px-8 py-3 rounded-full font-medium" href="#projects">View Projects</a>
         </div>
       </div>
 
-      <!-- Right Content -->
-      <div class="md:w-1/2 flex flex-col items-center space-y-6 relative mt-10 md:mt-0">
-
-        <!-- Profile Image -->
+      <!-- Profile Image + Impressions Button -->
+      <div class="md:w-1/2 flex flex-col items-center space-y-6">
         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white shadow-md">
-          <img alt="Profile Photo" class="w-full h-full object-cover" src="Profile Image.jpg" />
+          <img alt="Profile Photo" class="w-full h-full object-cover"
+            src="https://media.licdn.com/dms/image/v2/D4D03AQFSnvYpfc1VWw/profile-displayphoto-shrink_400_400/B4DZea7ssjGUAg-/0/1750651031824?e=1756339200&v=beta&t=Ga8KBpKqCIZAac1pEb9rt1YdjjU6PdhAeuXD2WN_C9U" />
         </div>
-
-        <!-- LinkedIn Button -->
-        <a class="flex items-center space-x-3 px-5 py-2 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-colors duration-300" href="https://www.linkedin.com/in/soham-patel-1695aa27b" rel="noopener noreferrer" target="_blank">
+        <a class="flex items-center space-x-3 px-5 py-2 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-colors duration-300"
+          href="https://www.linkedin.com/in/soham-patel-1695aa27b" rel="noopener noreferrer" target="_blank">
           <i class="fab fa-linkedin-in text-xl"></i>
           <span>100K+ Impressions</span>
         </a>
       </div>
     </div>
-  </div>
 
-  <!-- Desktop Quote (visible on md and above) -->
-<div class="hidden md:block w-full text-center absolute top-40 left-1/2 transform -translate-x-1/2 px-4 z-10">
-  <p class="text-white text-lg lg:text-2xl font-semibold italic leading-snug">
-    “Arise, awake, and stop not till the goal is reached”
-  </p>
-  <p class="text-white text-sm opacity-70 mt-1">
-    — Swami Vivekananda
-  </p>
-</div>
-
-  <!-- Down Arrow -->
-  <div class="hidden md:flex w-full justify-center absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-    <a class="text-white/70 hover:text-white animate-bounce" href="#about">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-      </svg>
-    </a>
+    <!-- Down Arrow (Hidden on Mobile) -->
+    <div class="hidden md:flex w-full justify-center absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+      <a class="text-white/70 hover:text-white animate-bounce" href="#about">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2"></path>
+        </svg>
+      </a>
+    </div>
   </div>
 </section>
+
 
 <!-- About Section -->
 <section class="py-20 bg-white" id="about">
