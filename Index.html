@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio | Soham Patel</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com">
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.classList.add('hidden');
+    });
+  }
+});
+document.querySelectorAll('.modal .close-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.modal').classList.add('hidden');
+  });
+});
+</script>
+<!-- Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts - Poppins & Montserrat -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Montserrat:wght@700&amp;display=swap" rel="stylesheet"/>
+<!-- AOS (Animate On Scroll) CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<style>
+    :root {
+      --primary: #0a2540;
+      --secondary: #00a6ed;
+      --accent: #7b61ff;
+      --light: #f8fafc;
+      --dark: #1e293b;
+    }
+    html {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background-color: var(--light);
+      width: 100%;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .hero-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a365d 100%);
+    }
+
+    /* Unified Card Styles for ALL cards (includes initial and hover effects) */
+    .card {
+      transition: all 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Initial shadow */
+      border: 1px solid transparent; /* Added for border-color to work on hover */
+    }
+    .skill-card {
+      transition: all 0.15s ease, box-shadow 0.15s ease;
+      transform: translateY(0); /* baseline */
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Initial shadow */
+      border: 1px solid transparent; /* Added for border-color to work on hover */
+    }
+    .card:hover {
+      transform: translateY(-10px); /* Lift up effect */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Broader, softer shadow */
+      border-color: rgba(102, 126, 234, 0.3); /* Subtle border highlight (blue/purple) */
+    }
+    .skill-card:hover {
+      transform: translateY(-10px) !important; /* Lift up effect */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Broader, softer shadow */
+      border-color: rgba(102, 126, 234, 0.3); /* Subtle border highlight (blue/purple) */
+    }
+    #core-ca .grid {
+      overflow: visible;
+    }
+    /* --- END Unified Card Styles --- */
+
+    .skill-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      overflow: hidden;
+      position: relative;
+    }
+    .skill-progress {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      transition: width 1.5s ease;
+    }
+    .number-counter {
+      font-weight: bold;
+      font-size: 2.5rem;
+      color: var(--primary);
+      display: inline-block;
+    }
+    .animated-icon {
+      transition: all 0.3s ease;
+    }
+    .animated-icon:hover {
+      transform: scale(1.2);
+      color: var(--accent);
+    }
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: linear-gradient(180deg, var(--secondary), var(--accent));
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--light);
+      border: 4px solid var(--accent);
+      border-radius: 50%;
+      top: 15px;
+      z-index: 1;
+    }
+    .timeline-left {
+      left: 0;
+    }
+    .timeline-right {
+      left: 50%;
+    }
+    .timeline-left::after {
+      right: -10px;
+    }
+    .timeline-right::after {
+      left: -10px;
+    }
+    .timeline-content {
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      .timeline-item::after {
+        left: 21px;
+      }
+      .timeline-right {
+        left: 0;
+      }
+    }
+    .btn-gradient {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .btn-gradient:hover {
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    .rotate-slow {
+      animation: rotate 10s linear infinite;
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .testimonial-slider, .endorsement-slider {
+      overflow: hidden;
+      position: relative;
+    }
+    .testimonial-track, .endorsement-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .testimonial, .endorsement-item {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+    .animate-bounce {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+    /* Skill Section Specific CSS */
+    /* .skill-icon is now handled by the unified .card:hover style */
+    .section-header::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 60%;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        border-radius: 2px;
+    }
+    .skill-detail-link {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: inline-block; /* Make it a block/inline-block to take space */
+    }
+    .skill-detail-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #3b82f6;
+        transition: width 0.3s ease;
+    }
+    .skill-detail-link:hover::before {
+        width: 100%;
+    }
+    .category-tab {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+    }
+    .category-tab.active {
+        border-bottom: 2px solid #3b82f6;
+        color: #3b82f6;
+        font-weight: 600;
+    }
+    .category-content {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    .category-content.active {
+        display: block;
+    }
+    /* @keyframes fadeIn is defined globally */
+    .hexagon {
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        transition: all 0.3s ease;
+    }
+    .hexagon:hover {
+        transform: rotate(10deg);
+    }
+    .skill-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-right: 6px;
+        margin-bottom: 6px;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+    .modal-content {
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+    .modal-overlay.open .modal-content {
+        transform: scale(1);
+    }
+    
+    .modal-description h4 {
+        color: #1f2937;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .modal-description p {
+         text-align: justify;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        color: #4b5563;
+    }
+
+    .modal-description .highlight {
+        font-weight: 600;
+        color: #2563eb;
+    }
+
+    .modal-description .bullet-point {
+        margin-left: 1rem;
+        position: relative;
+    }
+
+    .modal-description .bullet-point::before {
+        content: "❖";
+        position: absolute;
+        left: -1rem;
+        color: #2563eb;
+    }
+    .modal-close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #60a5fa;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .modal-close-button:hover {
+        background-color: #e0f2fe;
+        color: #3b82f6;
+    }
+
+    /* Specific adjustments for project icons - for consistent text-5xl sizing */
+    .project-icon-wrapper {
+        height: 48px; /* Equivalent to text-5xl */
+        width: 48px;  /* Equivalent to text-5xl */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .project-icon-wrapper i {
+        font-size: 48px; /* text-5xl equivalent */
+    }
+
+    /* Responsive iframe for LinkedIn Feed */
+    .linkedin-feed-container {
+        width: 100%; /* Take full width of parent */
+        max-width: 1000px; /* Max width on larger screens, as requested */
+        margin: 0 auto; /* Center it */
+        height: 400px; /* Fixed height as requested */
+        overflow-y: hidden; /* Hide scrollbar on the container itself */
+        border-radius: 0.5rem; /* Rounded corners for consistency */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    .linkedin-feed-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #d1d5db; /* Light gray border for distinction */
+        overflow-y: auto; /* Allow internal scrolling for the iframe content */
+    }
+
+     /* Mobile adjustments for iframe sizing */
+    @media (max-width: 768px) {
+        .linkedin-feed-container {
+            height: 300px; /* Slightly reduce height on smaller screens for better fit */
+        }
+    }
+  
+.card:hover {
+  transform: translateY(-10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content p {
+  margin-bottom: 1rem;
+  color: #333;
+}
+.modal-content ul {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+/* Animation for modal */
+.modal-enter {
+    animation: modalEnter 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+#progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 9999;
+}
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #00A6ED, #7B61FF);
+  transition: width 0.2s ease-out;
+}
+
+.active-nav {
+  font-weight: bold;
+  color: #7B61FF !important;
+  border-bottom: 2px solid #7B61FF;
+}
+
+/* Scrollbar Styling for WebKit Browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* Light grey track */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00A6ED, #7B61FF);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #7B61FF, #00A6ED);
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7B61FF #f1f5f9;
+}
+.linkedin-feed-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+/* Tailwind or plain CSS fallback */
+.opacity-0 { opacity: 0; }
+.opacity-100 { opacity: 1; }
+.translate-y-6 { transform: translateY(1.5rem); }
+.translate-y-0 { transform: translateY(0); }
+.transition-all { transition: all 1s ease; }
+
+.fade-slide-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.category-tab.active {
+  border-bottom: 3px solid #00a6ed;
+  color: #00a6ed;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+
+</style>
+</head>
+<body>
+<div id="progress-bar-container">
+  <div id="progress-bar"></div>
+</div>
+<!-- No Custom Cursor Glow HTML element -->
+<!-- Navigation -->
+<nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm flex flex-wrap justify-between items-center">
+<div class="container mx-auto px-4 py-3">
+<div class="flex justify-between items-center">
+<a class="text-2xl font-bold gradient-text" href="#">Soham's Portfolio</a>
+<div class="hidden md:flex space-x-8">
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#home">Home</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#about">About</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#skills">Skills</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#experience">Experience</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#projects">Projects</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#LinkedIn">LinkedIn</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#endorsements">Endorsements</a>
+<a class="nav-link text-gray-700 hover:text-gray-900" href="#contact">Contact</a>
+</div>
+<button class="md:hidden text-gray-700 focus:outline-none" id="menu-toggle">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4
+12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="md:hidden hidden" id="mobile-menu">
+<div class="flex flex-col space-y-4 mt-4 pb-4">
+<a class="text-gray-700 hover:text-gray-900" href="#home">Home</a>
+<a class="text-gray-700 hover:text-gray-900" href="#about">About</a>
+<a class="text-gray-700 hover:text-gray-900" href="#skills">Skills</a>
+<a class="text-gray-700 hover:text-gray-900" href="#experience">Experience</a>
+<a class="text-gray-700 hover:text-gray-900" href="#projects">Projects</a>
+<a class="text-gray-700 hover:text-gray-900" href="#LinkedIn">LinkedIn</a>
+<a class="text-gray-700 hover:text-gray-900" href="#endorsements">Endorsements</a>
+<a class="text-gray-700 hover:text-gray-900" href="#contact">Contact</a>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="hero-bg min-h-screen flex items-center pt-16 hero-text opacity-0 translate-y-6 transition-all duration-1000 ease-out delay-300" id="home">
+  <div class="container mx-auto px-4 py-16">
+    <div class="flex flex-col md:flex-row items-center relative">
+
+      <!-- Left Content -->
+      <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0 z-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+          <span class="block">Hi, I'm</span>
+          <span class="gradient-text">Soham Patel</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+          CA Finalist &amp; Tech Enthusiast
+        </p>
+        <p class="text-gray-300 mb-8 max-w-lg">
+          Bridging the gap between finance and technology with expertise in Audits, Compliance, Litigation, Taxation and a passion for innovative tech solutions.
+        </p>
+<!-- Mobile Quote (visible only on small screens) -->
+<div class="block md:hidden w-full text-center mb-6 px-4">
+  <p class="text-white text-base font-semibold italic leading-snug">
+    “Arise, awake, and stop not till the goal is reached”
+  </p>
+  <p class="text-white text-xs opacity-70 mt-1">
+    — Swami Vivekananda
+  </p>
+</div>
+
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+          <a class="btn-gradient px-8 py-3 rounded-full font-medium" href="#contact">Get In Touch</a>
+          <a class="btn-gradient px-8 py-3 rounded-full font-medium" href="#projects">View Projects</a>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="md:w-1/2 flex flex-col items-center space-y-6 relative mt-10 md:mt-0">
+
+        <!-- Profile Image -->
+        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white shadow-md">
+          <img alt="Profile Photo" class="w-full h-full object-cover" src="Profile Image.jpg" />
+        </div>
+
+        <!-- LinkedIn Button -->
+        <a class="flex items-center space-x-3 px-5 py-2 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-colors duration-300" href="https://www.linkedin.com/in/soham-patel-1695aa27b" rel="noopener noreferrer" target="_blank">
+          <i class="fab fa-linkedin-in text-xl"></i>
+          <span>100K+ Impressions</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Quote (visible on md and above) -->
+<div class="hidden md:block w-full text-center absolute top-40 left-1/2 transform -translate-x-1/2 px-4 z-10">
+  <p class="text-white text-lg lg:text-2xl font-semibold italic leading-snug">
+    “Arise, awake, and stop not till the goal is reached”
+  </p>
+  <p class="text-white text-sm opacity-70 mt-1">
+    — Swami Vivekananda
+  </p>
+</div>
+
+  <!-- Down Arrow -->
+  <div class="hidden md:flex w-full justify-center absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+    <a class="text-white/70 hover:text-white animate-bounce" href="#about">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="py-20 bg-white" id="about">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-10">
+<div class="md:w-1/2 fade-in" data-aos="fade-right">
+<h3 class="text-2xl font-bold mb-4 text-gray-800">Professional Background</h3>
+<p class="text-gray-600 mb-6">
+I'm a CA Final student with practical experience across Audit, Taxation, Compliance, Litigation, and Financial Reporting, earned through dynamic client engagements during my articleship.
+I’ve worked hands-on with businesses from varied sectors — helping them stay compliant, resolve complex queries, and improve financial clarity through structured analysis and documentation.
+</p>
+<p class="text-gray-600 mb-6">
+What distinguishes my journey is a deep inclination towards technology. Whether it's automating reconciliations using Python, enhancing audit workflows with Excel, or applying AI tools for legal research and reporting — 
+I actively build and apply digital skills to reimagine how core CA work gets done. My approach blends domain depth with tech agility — making traditional processes faster, smarter, and future-ready.
+</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="font-medium text-gray-800">Name:</p>
+<p class="text-gray-600">Soham Patel</p>
+</div>
+<div>
+<p class="font-medium text-gray-800">Email:</p>
+<p class="text-gray-600">sohampokar810@gmail.com</p>
+</div>
+<div>
+<p class="font-medium text-gray-800">Location:</p>
+<p class="text-gray-600">Ahmedabad, Gujarat, India</p>
+</div>
+<div>
+<p class="font-medium text-gray-800">Availability:</p>
+<p class="text-gray-600">Open to opportunities</p>
+</div>
+</div>
+<a class="btn-gradient px-8 py-3 rounded-full font-medium inline-block" href="#contact">
+Download Resume
+</a>
+</div>
+<div class="md:w-1/2 fade-in" data-aos="fade-left">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+    <!-- Taxation -->
+    <div class="card p-6 rounded-xl shadow-md bg-indigo-700 text-white hover:shadow-lg hover:scale-105 transition-transform duration-300">
+      <div class="text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
+      <h4 class="text-xl font-bold mb-2">Taxation</h4>
+      <p>Expert in preparing various tax returns with strong understanding of provisions.</p>
+    </div>
+
+    <!-- Compliance -->
+    <div class="card p-6 rounded-xl shadow-md bg-blue-600 text-white hover:shadow-lg hover:scale-105 transition-transform duration-300">
+      <div class="text-4xl mb-4"><i class="fas fa-file-alt"></i></div>
+      <h4 class="text-xl font-bold mb-2">Compliance</h4>
+      <p>Ensuring adherence to regulatory frameworks and filing standards.</p>
+    </div>
+
+    <!-- Litigation -->
+    <div class="card p-6 rounded-xl shadow-md bg-purple-700 text-white hover:shadow-lg hover:scale-105 transition-transform duration-300">
+      <div class="text-4xl mb-4"><i class="fas fa-balance-scale"></i></div>
+      <h4 class="text-xl font-bold mb-2">Litigation</h4>
+      <p>Experience handling tax litigation through case drafting and strategy.</p>
+    </div>
+
+    <!-- Tech Integration -->
+    <div class="card p-6 rounded-xl shadow-md bg-cyan-700 text-white hover:shadow-lg hover:scale-105 transition-transform duration-300">
+      <div class="text-4xl mb-4"><i class="fas fa-laptop-code"></i></div>
+      <h4 class="text-xl font-bold mb-2">Tech Integration</h4>
+      <p>Leveraging automation and digital tools to modernize CA workflows.</p>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="fade-in" data-aos="fade-up">
+<div class="number-counter" data-target="2">0</div>
+<p class="text-gray-600">Years of Articleship Experience</p>
+</div>
+<div class="fade-in" data-aos="fade-up" data-aos-delay="100">
+<div class="number-counter" data-target="6">0</div><span class="text-4xl font-semibold ml-1">+</span>
+<p class="text-gray-600">Projects Completed</p>
+</div>
+<div class="fade-in" data-aos="fade-up" data-aos-delay="200">
+<div class="number-counter" data-target="10">0</div><span class="text-4xl font-semibold ml-1">+</span>
+<p class="text-gray-600">Tech Tools Explored &amp; Used</p>
+</div>
+<div class="fade-in flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="300">
+<!-- Container for SVGs to keep them in a horizontal line -->
+<div class="flex items-center justify-center space-x-4 mb-4">
+<!-- Rupee SVG -->
+<div class="w-12 h-12 flex items-center justify-center animate-fade-in" style="animation-delay: 0s;">
+<svg height="48px" version="1.1" viewbox="0 0 256 256" width="48px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+<path d="M 52.182 90 c -1.408 0 -2.808 -0.592 -3.797 -1.744 L 15.363 49.774 c -1.272 -1.482 -1.564 -3.569 -0.749 -5.344 c 0.815 -1.775 2.59 -2.912 4.543 -2.912 h 18.763 c 8.69 0 15.76 -7.069 15.76 -15.759 C 53.681 17.07 46.611 10 37.921 10 H 19.158 c -2.761 0 -5 -2.239 -5 -5 s 2.239 -5 5 -5 h 18.763 c 14.204 0 25.76 11.556 25.76 25.759 s -11.556 25.759 -25.76 25.759 h -7.884 l 25.937 30.226 c 1.799 2.096 1.558 5.252 -0.538 7.051 C 54.492 89.604 53.334 90 52.182 90 z" stroke-linecap="round" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(59,98,209); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "></path>
+<path d="M 70.842 10 H 19.158 c -2.761 0 -5 -2.239 -5 -5 s 2.239 -5 5 -5 h 51.684 c 2.762 0 5 2.239 5 5 S 73.604 10 70.842 10 z" stroke-linecap="round" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(59,98,209); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "></path>
+<path d="M 70.842 30.759 H 19.158 c -2.761 0 -5 -2.239 -5 -5 s 2.239 -5 5 -5 h 51.684 c 2.762 0 5 2.239 5 5 S 73.604 30.759 70.842 30.759 z" stroke-linecap="round" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(59,98,209); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "></path>
+</g>
+</svg>
+</div>
+<!-- Green Tick Mark SVG -->
+<div class="w-12 h-12 flex items-center justify-center animate-fade-in" style="animation-delay: 0.2s;">
+<svg data-name="Layer 1" height="48px" id="Layer_1" viewbox="0 0 122.88 101.6" width="48px" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>.cls-1{fill:#10a64a;}</style>
+</defs>
+<title>tick-green</title>
+<path class="cls-1" d="M4.67,67.27c-14.45-15.53,7.77-38.7,23.81-24C34.13,48.4,42.32,55.9,48,61L93.69,5.3c15.33-15.86,39.53,7.42,24.4,23.36L61.14,96.29a17,17,0,0,1-12.31,5.31h-.2a16.24,16.24,0,0,1-11-4.26c-9.49-8.8-23.09-21.71-32.91-30v0Z"></path>
+</svg>
+</div>
+<!-- Litigation Symbol SVG -->
+<div class="w-12 h-12 flex items-center justify-center animate-fade-in" style="animation-delay: 0.4s;">
+<svg clip-rule="evenodd" fill-rule="evenodd" height="48px" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewbox="0 0 486 511.942" width="48px" xmlns="http://www.w3.org/2000/svg">
+<path d="M269.863 203.715v249.556h135.206c3.748 0 7.138 1.537 9.579 3.978a13.552 13.552 0 013.982 9.582v31.55c0 3.693-1.552 7.092-4.008 9.554l.021.02c-2.445 2.445-5.85 3.987-9.574 3.987H83.853c-3.669 0-7.066-1.524-9.54-3.983l-.042-.042c-2.444-2.46-3.979-5.829-3.979-9.536v-31.55c0-3.738 1.523-7.131 3.976-9.584a13.523 13.523 0 019.585-3.976h135.249l.001-249.364a54.7 54.7 0 01-13.567-9.9 55.038 55.038 0 01-9.944-13.549h-74.523v3.279c0 3.738-1.524 7.131-3.977 9.584a13.525 13.525 0 01-9.584 3.976h-3.696l51.539 121.755h33.524v10.755c0 26.075-10.572 49.685-27.662 66.775-17.09 17.09-40.7 27.663-66.776 27.663-26.075 0-49.685-10.573-66.775-27.663C10.571 379.492 0 355.882 0 329.807v-10.755H33.614l52.978-121.755h-2.765a13.528 13.528 0 01-9.586-3.976 13.529 13.529 0 01-3.976-9.584v-3.279H57.553a14.313 14.313 0 01-9.28-3.429c-2.928-2.509-4.74-6.092-4.74-10.131v-23.682c0-4.042 1.815-7.621 4.74-10.132a14.308 14.308 0 019.28-3.43h138.182a55.124 55.124 0 0116.966-19.301c8.942-6.307 19.832-10.013 31.563-10.013 11.732 0 22.62 3.706 31.563 10.013a55.134 55.134 0 0116.966 19.301h138.576c3.524 0 6.817 1.314 9.28 3.43 2.926 2.511 4.741 6.09 4.741 10.132v23.682c0 4.039-1.813 7.622-4.741 10.131a14.304 14.304 0 01-9.28 3.429h-15.712v3.279c0 3.738-1.524 7.131-3.976 9.584a13.531 13.531 0 01-9.585 3.976h-1.16l51.54 121.755H486v10.755c0 26.075-10.573 49.685-27.663 66.775-17.089 17.09-40.7 27.663-66.775 27.663-26.076 0-49.686-10.573-66.775-27.663-17.091-17.09-27.663-40.7-27.663-66.775v-10.755h33.615l52.977-121.755h-5.301a13.528 13.528 0 01-9.586-3.976 13.529 13.529 0 01-3.976-9.584v-3.279h-71.915a55.214 55.214 0 01-23.075 23.257zm74.241 115.337h95.079l-46.885-110.761-48.194 110.761zm-297.124 0h95.079L95.174 208.291 46.98 319.052z" fill-rule="nonzero"></path>
+<path d="M259.108 196.743v267.282h145.961c1.543 0 2.806 1.286 2.806 2.806v31.55c0 1.516-1.29 2.806-2.806 2.806H83.853c-1.516 0-2.806-1.262-2.806-2.806v-31.55a2.815 2.815 0 012.806-2.806h145.961l.001-267.143c-12.717-4.409-22.792-14.469-27.215-27.179h-92.286v14.034a2.814 2.814 0 01-2.806 2.805H83.827a2.815 2.815 0 01-2.807-2.805v-14.034H57.553c-1.796 0-3.265-1.262-3.265-2.805v-23.682c0-1.544 1.469-2.807 3.265-2.807h145.151c6.081-17.081 22.391-29.314 41.56-29.314 19.168 0 35.479 12.233 41.561 29.314h145.544c1.797 0 3.266 1.263 3.266 2.807v23.682c0 1.543-1.469 2.805-3.266 2.805h-26.467v14.034a2.814 2.814 0 01-2.806 2.805h-23.681a2.814 2.814 0 01-2.807-2.805v-14.034h-89.677c-4.378 12.578-14.291 22.562-26.823 27.04z" fill="#FFE27B"></path>
+<path d="M244.264 125.225c16.524 0 29.977 13.472 29.977 29.977 0 16.531-13.461 29.975-29.977 29.975-8.275 0-15.77-3.357-21.194-8.781-5.424-5.425-8.782-12.92-8.782-21.194 0-8.275 3.358-15.771 8.782-21.195 5.424-5.425 12.919-8.782 21.194-8.782z" fill-rule="nonzero"></path>
+<path d="M244.264 135.98c10.615 0 19.222 8.606 19.222 19.222 0 10.614-8.607 19.221-19.222 19.221-10.616 0-19.221-8.607-19.221-19.221 0-10.616 8.605-19.222 19.221-19.222z" fill="#EA542B"></path>
+<path d="M94.437 329.807H10.755c0 46.217 37.466 83.683 83.682 83.683 46.217 0 83.683-37.466 83.683-83.683H94.437zM391.562 329.807h-83.683c0 46.217 37.466 83.683 83.683 83.683 46.217 0 83.683-37.466 83.683-83.683h-83.683z" fill="#FFC54A"></path>
+<path d="M391.563 0c30.752 0 55.678 24.927 55.678 55.678 0 30.749-24.926 55.677-55.678 55.677-30.75.002-55.678-24.926-55.678-55.677C335.885 24.926 360.813 0 391.563 0z" fill="#FE3150"></path>
+<path d="M405.083 33.134a6.155 6.155 0 018.767-.023c2.426 2.437 2.436 6.402.024 8.852l-13.567 13.72 13.577 13.73c2.396 2.432 2.361 6.37-.07 8.798-2.434 2.428-6.347 2.421-8.74-.011l-13.507-13.655-13.526 13.676a6.153 6.153 0 01-8.766.024c-2.426-2.437-2.438-6.402-.024-8.852l13.567-13.72-13.578-13.729c-2.395-2.431-2.361-6.37.072-8.799 2.433-2.428 6.346-2.421 8.738.011l13.508 13.657 13.525-13.679z" fill="#fff"></path>
+<path d="M94.439.006c30.747 0 55.671 24.924 55.671 55.67 0 30.747-24.924 55.671-55.671 55.671S38.768 86.423 38.768 55.676c0-30.746 24.924-55.67 55.671-55.67z" fill="#68D166"></path>
+<path d="M65.747 58.451c.819-4.748 6.24-7.392 10.516-4.82.389.232.759.507 1.103.822l.033.031c1.92 1.839 4.07 3.753 6.202 5.651l1.828 1.642 25.07-26.132c1.297-1.357 2.244-2.234 4.189-2.673 6.659-1.468 11.339 6.671 6.62 11.645L90.893 76.37c-2.547 2.717-7.1 2.965-9.838.37-1.57-1.458-3.277-2.94-5.002-4.436-2.989-2.598-6.037-5.247-8.523-7.87-1.491-1.49-2.135-3.931-1.783-5.983z" fill="#fff"></path>
+</svg>
+</div>
+</div>
+<!-- Text below the SVGs -->
+<p class="text-gray-600">Broad Exposure Across Taxation, Audit &amp; Litigation</p>
+</div>
+</div>
+</div></section>
+<!-- Skills Section -->
+<section class="py-20 bg-gray-50" id="skills">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                A unique blend of domain expertise and technical capabilities that allows me to
+                bring innovative solutions to complex business challenges.
+            </p>
+</div>
+<!-- Skill Tabs - Responsive -->
+<div class="overflow-x-auto no-scrollbar mb-6">
+  <div class="flex space-x-4 px-4 py-2 md:justify-center border-b border-gray-200">
+    <div class="category-tab active flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-blue-700 cursor-pointer whitespace-nowrap" data-target="core-ca">
+      Core CA Skills
+    </div>
+    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-indigo-600 cursor-pointer whitespace-nowrap" data-target="tech-tools">
+      Tech Tools &amp; Software
+    </div>
+    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-purple-600 cursor-pointer whitespace-nowrap" data-target="automation">
+      Automation &amp; Programming
+    </div>
+  </div>
+</div>
+
+<!-- Core CA Skills -->
+<div class="category-content active" id="core-ca">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Skill Card 1: Statutory & Tax Audit -->
+    <div class="max-w-md mx-auto">
+        <div class="skill-card bg-white p-6 cursor-pointer"
+             data-aos="fade-up"
+             data-modal-description="<p>Comprehensive expertise in conducting statutory audits and tax audits in compliance with regulatory requirements.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b></P>
+                <h4>From Vouching to Finalization — Owning the Audit Lifecycle</h4><br>
+<p>I began my audit journey with vouching and documentary checks, but soon transitioned into handling full-fledged assignments — from ledger scrutiny to audit report finalization. What set me apart was my attention to detail and a proactive mindset that allowed me to cross-connect data, identify missed compliances, and support decision-making at the client level.</p>
+
+<h4>Breadth of Exposure</h4>
+<ul>
+  <li>Handled statutory audits across manufacturing, IT, logistics, trading, and service industries — with client turnovers ranging from ₹1 crore to ₹100 crore.</li>
+  <li>Visited client sites for fieldwork and gained practical insights into business models, accounting systems, and internal controls.</li>
+  <li>Adapted to varying client environments — balancing professional conduct with time-bound deliverables in high-pressure settings.</li>
+</ul>
+
+<br><h4>Key Contributions</h4>
+<ul>
+  <li>Flagged unrecorded RoDTEP credits and non-compliant GST credit claims missed by seniors — ensuring accurate tax positioning.</li>
+  <li>Discovered errors in final audit reports and rectified them before submission, improving report quality and compliance confidence.</li>
+  <li>Improved audit documentation practices by creating a centralized Excel-based query tracker with linked working papers, statuses, and client responses — adopted across multiple audits.</li>
+</ul>
+
+<br><h4>Finalization & Financial Reporting</h4>
+<p>In the final phase of audits, I reviewed P&L and Balance Sheets for presentation accuracy, assisted in preparing financial statements, notes, and cash flows — ensuring all outputs met statutory and professional standards. These stages helped me develop a sense of precision, documentation hygiene, and presentation excellence.</p>
+
+<i><p class=&quot;highlight text-blue-700 font-semibold&quot;>
+&quot;I don’t just audit transactions — I connect patterns, flag risk, and structure insights that help both teams and clients make better decisions.&quot;
+</p></i>"
+             data-modal-icon="fas fa-check-double" 
+             data-modal-icon-color="text-blue-600" 
+             data-modal-tags="Financial Verification,Compliance,Risk Assessment" 
+             data-modal-title="Statutory &amp; Tax Audit">
+            
+            <div class="flex items-center mb-4">
+                <div class="hexagon bg-blue-100 p-3 mr-4">
+                    <i class="fas fa-check-double text-blue-600 text-2xl skill-icon"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Statutory &amp; Tax Audit</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-2">Comprehensive expertise in conducting statutory audits and tax audits in compliance with regulatory requirements.</p>
+            
+            <div class="mt-2 flex flex-wrap gap-1">
+                <span class="skill-tag bg-blue-50 text-blue-700">Financial Verification</span>
+                <span class="skill-tag bg-blue-50 text-blue-700">Compliance</span>
+                <span class="skill-tag bg-blue-50 text-blue-700">Risk Assessment</span>
+            </div>
+            
+            <button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">
+                View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="skillModal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl modal-enter">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="hexagon bg-blue-100 p-3 mr-4">
+                        <i id="modalIcon" class="fas fa-check-double text-blue-600 text-2xl"></i>
+                    </div>
+                    <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Skill Title</h2>
+                </div>
+                <button id="closeModalX" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6">
+                <div id="modalDescription" class="modal-description text-gray-700 mb-6">
+                    <!-- Formatted content will be inserted here -->
+                </div>
+                
+                <!-- Tags Section -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-2">RELATED SKILLS</h4>
+                    <div id="modalTags" class="flex flex-wrap gap-2">
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            <span class="skill-tag bg-blue-50 text-blue-700">Financial Verification</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700">Compliance</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700">Risk Assessment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <!-- Modal Footer -->
+            <div class="flex justify-end p-6 border-t border-gray-200">
+                <button id="closeModalBtn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                    <i class="fas fa-times mr-2"></i>Close
+                </button>
+            </div>
+        </div>
+    </div>
+<!-- Skill Card 2: Direct Taxation -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Expert knowledge in income tax laws, tax planning strategies, and filing requirements for individuals and businesses. This covers ITR filing, advanced tax planning, and providing tailored tax advisory services to minimize liabilities.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+  <h4>Translating Complex Tax Provisions into Clear, Compliant Outcomes</h4>
+<p>From individual returns to corporate tax filings, I’ve worked across the spectrum of direct tax compliance — with a focus on structure, clarity, and accuracy. My strength lies in translating Income Tax provisions into workflows that are efficient and error-free, even in high-volume scenarios.</p>
+
+<h4>Tax Return Filings</h4>
+<ul>
+  <li>Prepared and filed ITR-1 to ITR-6 for salaried individuals, professionals, partnership firms, and companies — ensuring timely compliance and optimized tax positions.</li>
+  <li>Handled returns for IT-sector clients involving complex deductions and exemption claims — aligning with documentation requirements and audit trails.</li>
+</ul>
+
+<br><h4>Tax Audit Reports</h4>
+<ul>
+  <li>Prepared 3CD reports under Section 44AB for clients across multiple sectors, incorporating depreciation schedules, disallowance workings, and ledger breakups.</li>
+  <li>Collaborated with audit teams to sync audit findings with reporting disclosures — reducing post-report discrepancies.</li>
+</ul>
+
+<br><h4>Income Tax Notices & Representation</h4>
+<ul>
+  <li>Drafted replies for scrutiny notices under Sections 148, 147, and 143(3) — including notices related to political donations and mismatch issues.</li>
+  <li>Used AI tools to analyze case law, prepare argument flows, and support client response strategies — even without formal appeal involvement.</li>
+</ul>
+
+<br><h4>TDS Compliance & Corrections</h4>
+<ul>
+  <li>Filed quarterly returns for Forms 24Q, 26Q, and 27EQ — including complex cases involving 350+ employee records and multi-section deductions.</li>
+  <li>Corrected TDS returns using utility tools, addressed PAN mismatches, and coordinated with clients on salary/TDS clarifications.</li>
+</ul>
+
+<br><p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&QUOT;I approach taxation not just as a set of rules — but as a system to be streamlined, understood, and delivered with precision.&QUOT;
+</p></i>
+
+"
+data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-600" data-modal-tags="Tax Planning,ITR Filing,Tax Advisory" data-modal-title="Direct Taxation">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-blue-100 p-3 mr-4">
+<i class="fas fa-file-invoice-dollar text-blue-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Direct Taxation</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-4">Expert knowledge in income tax laws, tax planning strategies, and filing requirements for individuals and businesses.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-blue-50 text-blue-700">Tax Planning</span>
+<span class="skill-tag bg-blue-50 text-blue-700">ITR Filing</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Tax Advisory</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Skill Card 3: Indirect Taxation -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Specialized knowledge in GST, customs duty, and other indirect tax regulations and compliance procedures. My experience includes managing GST returns, preparing reconciliations and ensuring adherence to complex indirect tax frameworks.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Turning Compliance into Efficient, Scalable Systems</h4>
+<p>I’ve worked extensively on GST filings, reconciliations, and credit optimization across a wide range of industries. My focus has been on building workflows that minimize error, save time, and support better working capital management for clients.</p>
+
+<h4>GST Returns and Reconciliations</h4>
+<ul>
+  <li>Filed GSTR-1 and GSTR-3B for clients in manufacturing, trading, and service sectors using clean, structured formats.</li>
+  <li>Prepared complex GST reconciliations by matching portal data with books, identifying mismatches, and highlighting missed ITC and blocked credits.</li>
+  <li>Developed custom Excel templates to handle dynamic reconciliation logic for different client needs.</li>
+</ul>
+
+<br><h4>Tools That Improved Accuracy and Efficiency</h4>
+<ul>
+  <li>Built a Python-based tool that bulk downloads GSTR-2B data from the portal, saving time in multi-client return prep.</li>
+  <li>Created a web scraping utility to generate GST payment challans with pre-filled details.</li>
+  <li>Developed a GSTIN verification tool using public APIs to validate vendor databases and reduce compliance risk.</li>
+</ul>
+
+<br><h4>Handling Queries and Process Support</h4>
+<ul>
+  <li>Resolved GST mismatch queries raised by clients, explained credit utilization breakdowns, and guided them through reporting clarity.</li>
+  <li>Contributed to one GST notice case in its early stages, and assisted in preparing an annual return, building basic familiarity with GSTR-9.</li>
+</ul>
+
+<br><p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;For me, indirect tax isn’t just a filing task. It’s a system that can be understood, optimized, and simplified using the right tools and thinking.&quot;</i>
+</p>
+" data-modal-icon="fas fa-percentage" data-modal-icon-color="text-blue-600" data-modal-tags="GST,Customs Duty,Reconciliations" data-modal-title="Indirect Taxation">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-blue-100 p-3 mr-4">
+<i class="fas fa-percentage text-blue-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Indirect Taxation</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Specialized knowledge in GST, customs duty, and other indirect tax regulations and compliance procedures.</p>
+<br><div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-blue-50 text-blue-700">GST</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Customs Duty</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Reconciliations</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Skill Card 4: Compliance & Regulatory Filings -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-modal-description="Proficient in ensuring statutory compliance through timely ROC filings, legal drafting, and structured documentation across various entities.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Supporting Regulatory Compliance with Consistency and Curiosity</h4>
+<p>While most of my core experience lies in taxation and audit, I’ve also assisted with corporate compliance and ROC filings — contributing to timely documentation, form preparation, and company-level legal upkeep. I treated this exposure as an opportunity to understand the broader regulatory ecosystem beyond just numbers.</p>
+
+<h4>ROC Filings and MCA Compliance</h4>
+<ul>
+  <li>Filed statutory forms such as DIN KYC, AOC-4, MGT-7 for private companies and Form 3, 4, 8 and 11 for LLPs.</li>
+  <li>Assisted in drafting legal documents including partnership deeds, LLP agreements, and HUF deeds.</li>
+  <li>Handled the winding up of a private limited company.</li>
+  <li>Used the MCA portal to retrieve public company documents and verify form submissions during audits.</li>
+  <li>Maintained clarity in filing data, supported documentation reviews, and followed standard formats to ensure clean submission.</li>
+</ul>
+
+<br><h4>Broader Compliance Mindset</h4>
+<ul>
+  <li>Approached compliance as a structured process, using internal checklists and schedules to avoid missed filings or rushed submissions.</li>
+  <li>Ensured alignment between statutory audit outputs and regulatory documentation when applicable.</li>
+</ul>
+
+<br><i><p class=&quot;highlight text-blue-700 font-semibold&quot;>
+&quot;Even with limited exposure, I’ve treated every compliance task as a learning ground — where accuracy, presentation, and timing all matter just as much as technical input.&quot;
+</p></i>
+" data-modal-icon="fas fa-clipboard-check" data-modal-icon-color="text-blue-600" data-modal-tags="ROC Filings,Documentation,Statutory Reports" data-modal-title="Compliance &amp; Regulatory Filings">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-blue-100 p-3 mr-4">
+<i class="fas fa-clipboard-check text-blue-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Compliance &amp; Regulatory Filings</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Proficient in ensuring adherence to various statutory compliances and timely regulatory filings.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-blue-50 text-blue-700">ROC Filings</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Documentation</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Statutory Reports</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Skill Card 5: Tax Litigation -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Experience in handling tax disputes, appeals, and representing clients before tax authorities. My skills include preparing detailed arguments, negotiating with authorities, and providing effective dispute resolution strategies for both individuals and businesses.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Drafting, Defending, and Thinking Like a Litigator</h4>
+<p>My exposure to tax litigation spans practical drafting of replies, department-level submissions, and strategic insights from structured moot court simulations. Whether handling direct or indirect tax matters, I’ve worked on building strong, well-reasoned responses aligned with the legal framework and client position.</p>
+
+<h4>Practical Litigation Experience</h4>
+<ul>
+  <li>Drafted replies for Income Tax notices under Sections 143(3), 147, and 148, including cases involving political donations and uncredited tax payments.</li>
+  <li>Handled GST-related litigation by preparing replies to ITC denial notices based on cancelled supplier registrations — argued admissibility under Section 16(2) using relevant case law.</li>
+  <li>Personally visited Income Tax and GST departments to submit responses and assist in follow-ups.</li>
+</ul><br>
+
+<h4>Insights from Moot Court Sessions</h4>
+<ul>
+  <li>Drafted Grounds of Appeal, Statements of Facts, and reply memos using judicial precedents and statutory interpretations.</li>
+  <li>Practiced litigation strategies involving Sections 40(a)(i), 72A, 201, 90, and 92C, as well as DTAA application and transfer pricing disputes.</li>
+  <li>Analyzed both assessee and department viewpoints to improve argument depth and anticipate objections.</li>
+</ul>
+
+<br><p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;For me, litigation is more than just responding to notices — it's about building credible arguments, interpreting law with clarity, and defending compliance with confidence.&quot;
+</p></i>
+" data-modal-icon="fas fa-gavel" data-modal-icon-color="text-blue-600" data-modal-tags="Appeals,Representation,Dispute Resolution" data-modal-title="Tax Litigation">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-blue-100 p-3 mr-4">
+<i class="fas fa-gavel text-blue-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Tax Litigation</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Experience in handling tax disputes, appeals, and representing clients before tax authorities.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-blue-50 text-blue-700">Appeals</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Representation</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Dispute Resolution</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Skill Card 6: Financial Reporting -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Skilled in preparing and analyzing financial statements in accordance with applicable accounting standards. My expertise covers detailed financial statement preparation, in-depth analysis, and generation of comprehensive MIS (Management Information System) reports for strategic decision-making.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Turning Financial Data into Meaningful, Compliant Reports</h4>
+<p>I’ve worked on end-to-end financial reporting for a wide variety of entities — from sole proprietorships to private limited companies — covering the full cycle from trial balance to finalized statements. My role included drafting, reviewing, and finalizing reports that met both statutory requirements and management expectations.</p>
+
+<h4>Preparation & Finalization of Financial Statements</h4>
+<ul>
+  <li>Prepared Profit & Loss accounts, Balance Sheets, and Notes to Accounts for audit clients across various structures — including firms, LLPs, and private companies.</li>
+  <li>Ensured accurate presentation in line with the Companies Act, Schedule III, and ICAI’s applicable standards for corporate and non-corporate entities.</li>
+  <li>Developed comfort with Cash Flow Statement preparation, from early challenges to confidently handling direct and indirect method reports.</li>
+</ul>
+<br>
+<h4>MIS Reporting Experience</h4>
+<ul>
+  <li>Prepared structured MIS reports for a Middle East-based business, focused on clarity, financial trend analysis, and operational insight.</li>
+  <li>Used Excel-based reporting frameworks to deliver clear visuals and performance tracking tailored to management needs.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;Whether it's statutory reporting or internal MIS, I focus on delivering accuracy, structure, and professional clarity — turning numbers into confidence.&quot;
+</p></i>
+" data-modal-icon="fas fa-chart-line" data-modal-icon-color="text-blue-600" data-modal-tags="Financial Statements,Analysis,MIS Reports" data-modal-title="Financial Reporting">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-blue-100 p-3 mr-4">
+<i class="fas fa-chart-line text-blue-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Financial Reporting</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Skilled in preparing and analyzing financial statements in accordance with applicable accounting standards.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-blue-50 text-blue-700">Financial Statements</span>
+<span class="skill-tag bg-blue-50 text-blue-700">Analysis</span>
+<span class="skill-tag bg-blue-50 text-blue-700">MIS Reports</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+</div>
+<!-- Tech Tools and Software Skills -->
+<div class="category-content hidden" id="tech-tools">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Tech Skill Card 1: Tally Prime -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-modal-description="Advanced proficiency in Tally Prime for accounting, auditing, and financial reporting. My capabilities include seamless transaction recording, audit analytics, generation of GST reports, and comprehensive financial statement preparation.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Making Tally Prime Work Smarter, Not Just Faster</h4>
+<p>I’ve used Tally Prime extensively for accounting, auditing, and reconciliation tasks, and have focused on optimizing how the tool supports accuracy and efficiency. Beyond basic usage, I’ve leveraged shortcuts, TDLs, and Excel integration to make the platform more powerful for practical work.</p>
+
+<h4>Practical Applications</h4>
+<ul>
+  <li>Used Tally for ledger scrutiny, voucher verification, and audit trail checks across industries.</li>
+  <li>Prepared GST returns and accounting reports like trial balance, P&L, and balance sheets through Tally.</li>
+</ul>
+<br>
+<h4>Customization & Automation</h4>
+<ul>
+  <li>Set up custom views and filters using TDLs to assist in both compliance and analytics.</li>
+  <li>Integrated Excel with Tally for faster data entry and reconciliation with minimal errors.</li>
+  <li>Enabled advanced features to improve the quality and speed of audit documentation and review.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;>
+<i>&quot;For me, Tally isn’t just an accounting software — it’s a platform to build smarter systems for scalable, audit-ready finance processes.&quot;</i>
+</p>
+" data-modal-icon="fas fa-calculator" data-modal-icon-color="text-indigo-600" data-modal-tags="Accounting,Audit,GST Reports,Financial Statements" data-modal-title="Tally Prime">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-indigo-100 p-3 mr-4">
+<i class="fas fa-calculator text-indigo-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Tally Prime</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Advanced proficiency in Tally Prime for accounting, auditing, and financial reporting.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-indigo-50 text-indigo-700">Accounting</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Audit</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">GST Reports</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Financial Statements</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-indigo-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Tech Skill Card 2: Microsoft Office Suite -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Expert in Microsoft Excel, Word, PowerPoint, and other Office applications for business and financial analysis. I leverage advanced Excel functions for data analysis, create professional documents in Word, and design compelling presentations in PowerPoint to communicate complex financial information effectively.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Powering Accuracy and Automation with the Office Suite</h4>
+<p>I’ve leveraged Microsoft Excel, Word, and PowerPoint not just as office tools, but as platforms to streamline audit, tax, and compliance work. My strongest command lies in Excel, where automation, reconciliation, and presentation come together in practical, impactful ways.</p>
+
+<h4>Excel — My Core Workspace</h4>
+<ul>
+  <li>Proficient in advanced formulas (INDEX-MATCH, VLOOKUP, SUMIFS), pivot tables, conditional formatting, and Excel shortcuts for fast, error-free reporting.</li>
+  <li>Applied Excel to GST and TDS reconciliations, audit analysis, and automated workflows using basic VBA and Python integration.</li>
+  <li>Created structured and professional templates for observations, audit trails, and MIS reports.</li>
+</ul>
+<br>
+<h4>Word & Mail Merge</h4>
+<ul>
+  <li>Drafted audit reports, legal replies, and formal letters with precision formatting and version control.</li>
+  <li>Used mail merge to auto-generate notices, client summaries, and document batches efficiently.</li>
+</ul>
+<br>
+<h4>PowerPoint</h4>
+<ul>
+  <li>Created and presented structured slide decks during training, assessments, and internal events.</li>
+  <li>Familiar with professional formatting, transitions, and content hierarchy.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;Excel is where I analyze, Word is where I articulate, and PowerPoint is where I simplify — each tool helping me work smarter across audit and compliance.&quot;
+</p></i>
+" data-modal-icon="fas fa-file-excel" data-modal-icon-color="text-indigo-600" data-modal-tags="Excel,Word,PowerPoint,Data Analysis" data-modal-title="Microsoft Office Suite">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-indigo-100 p-3 mr-4">
+<i class="fas fa-file-excel text-indigo-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Microsoft Office Suite</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Expert in Microsoft Excel, Word, PowerPoint, and other Office applications for business and financial analysis.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-indigo-50 text-indigo-700">Excel</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Word</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">PowerPoint</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Data Analysis</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-indigo-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Tech Skill Card 3: Winman and Genius -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Proficient in using Winman and Genius software for direct tax calculations, returns, and compliance. I am experienced in accurately filing ITRs, performing complex tax computations, and preparing TDS returns efficiently, ensuring full compliance with direct tax regulations.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Making Compliance Simpler with Specialized Tax Software</h4>
+<p>I’ve worked independently with Winman and Genius software for Income Tax and TDS compliance tasks — from data entry to final report generation. These tools helped streamline the filing process, reduce errors, and ensure timely submissions for a wide variety of clients.</p>
+
+<h4>Core Functional Use</h4>
+<ul>
+  <li>Prepared and filed Income Tax Returns and TDS returns using both Winman and Genius across multiple entities.</li>
+  <li>Generated tax audit reports and annexures directly from software with accuracy checks.</li>
+  <li>Used smart shortcuts and input tools to boost speed and minimize manual errors.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;My goal is not just to operate software — but to make tax compliance more efficient, structured, and error-free through smart tool usage.&quot;
+</p></i>
+" data-modal-icon="fas fa-file-invoice" data-modal-icon-color="text-indigo-600" data-modal-tags="ITR Filing,Tax Computation,TDS Returns" data-modal-title="Winman and Genius">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-indigo-100 p-3 mr-4">
+<i class="fas fa-file-invoice text-indigo-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Winman and Genius</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Proficient in using Winman and Genius software for direct tax calculations, returns, and compliance.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-indigo-50 text-indigo-700">ITR Filing</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Tax Computation</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">TDS Returns</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-indigo-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Tech Skill Card 4: ClearGST -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-modal-description="Experienced in using ClearGST software for GST return filing, reconciliation, and compliance management. My responsibilities include timely GSTR filing, reconciling discrepancies between purchase and sales data for various clients, ensuring accurate and compliant GST operations.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Using ClearGST for Seamless GST Return Filing & Data Management</h4>
+<p>I’ve independently used ClearGST to manage GST return filings and download key compliance data. The platform supported my efforts in accurate and timely submissions, particularly when handling multi-period returns or complex client datasets.</p>
+
+<h4>What I Did</h4>
+<ul>
+  <li>Filed GSTR-1, GSTR-3B, and downloaded 2A/2B and other GST data using ClearGST’s interface.</li>
+  <li>Applied tips and shortcuts within the tool to enhance speed and ensure accurate mapping between portal and books.</li>
+  <li>Used the software’s batch processing and auto-fill features to streamline high-volume tasks.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;ClearGST helped me go beyond manual filing — enabling accuracy, structure, and scale in GST compliance work.&quot;
+</p></i>
+" data-modal-icon="fas fa-receipt" data-modal-icon-color="text-indigo-600" data-modal-tags="GSTR Filing,Reconciliation,E-invoicing" data-modal-title="ClearGST">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-indigo-100 p-3 mr-4">
+<i class="fas fa-receipt text-indigo-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">ClearGST</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Experienced in using ClearGST software for GST return filing, reconciliation, and compliance management.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-indigo-50 text-indigo-700">GSTR Filing</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">Reconciliation</span>
+<span class="skill-tag bg-indigo-50 text-indigo-700">E-invoicing</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-indigo-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+</div>
+<!-- Automation & Programming Exposure -->
+<div class="category-content hidden" id="automation">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Automation Skill Card 1: Python Basics -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-modal-description="Foundational knowledge of Python programming language for data analysis and automation tasks. I utilize Python for basic data manipulation, scripting repetitive processes, and developing small tools to enhance efficiency in financial operations.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Building Tools to Let Humans Focus on What Matters</h4>
+<p>As a CA Final student with a deep interest in technology, I use programming to solve practical audit and compliance challenges. From GST reconciliations to bulk downloads and validations, I’ve developed tools that save time, reduce manual effort, and improve reporting accuracy.</p>
+
+<h4>Projects Built with Python</h4>
+<ul>
+  <li><b>AutoChallanX:</b> A tool that automates the preparation of GST challans using web scraping and form automation.</li>
+  <li><b>SpeedB 3.0:</b> A utility that bulk downloads GSTR-2B data from the GST portal to simplify reconciliation.</li>
+  <li><b>GSTIN Verifier:</b> An API-integrated Python script that verifies large lists of GSTINs efficiently.</li>
+</ul>
+<br>
+<h4>Why Automation?</h4>
+<p>My goal is to eliminate repetitive work so professionals can focus on judgment, analysis, and strategy. I believe finance needs to evolve — and automation is how we get there.</p>
+
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;For me, programming isn't just about writing code — it’s about creating scalable solutions that free up time for deeper thinking.&quot;
+</p></i>
+" data-modal-icon="fab fa-python" data-modal-icon-color="text-purple-600" data-modal-tags="Data Analysis,Automation,Scripting" data-modal-title="Python Basics">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-purple-100 p-3 mr-4">
+<i class="fab fa-python text-purple-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Python Basics</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Foundational knowledge of Python programming language for data analysis and automation tasks.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-purple-50 text-purple-700">Data Analysis</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Automation</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Scripting</span>
+</div><br>
+<button class="skill-detail-link inline-block mt-4 text-purple-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Automation Skill Card 2: Web Scraping -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Experience in extracting and analyzing data from websites for research and business intelligence. I apply web scraping techniques to gather large datasets, which are then analyzed to provide actionable insights for various financial and market research purposes.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Scraping Smarter: Turning Web Data into Actionable Insight</h4>
+<p>I’ve developed robust web scraping solutions using Python and tools like Selenium and Requests — not just for learning, but to solve real-world compliance and reporting problems. My scripts are built to ensure accuracy, resilience, and full integration into professional workflows.</p>
+
+<h4>What I've Built</h4>
+<ul>
+  <li>Automated data collection from GST and other government portals, saving hours of manual effort per filing cycle.</li>
+  <li>Handled OTP logins and session authentication using Selenium remote debugging for reliable, repeatable access.</li>
+  <li>Structured scraped data into Excel and Google Sheets via Pandas and CSV workflows, ready for audit/reconciliation use.</li>
+</ul>
+<br>
+<h4>Technical Depth</h4>
+<ul>
+  <li>Managed session tokens, pagination, and anti-scraping logic ethically and efficiently.</li>
+  <li>Parsed and stored data using Python's Pandas, JSON, and CSV modules for downstream analysis.</li>
+  <li>Handled dynamic websites, real-time updates, and login-based scraping with minimal manual interference.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;My scraping projects don’t just gather data — they power decisions, reduce friction, and automate entire reporting processes.&quot;
+</p></i>
+" data-modal-icon="fas fa-spider" data-modal-icon-color="text-purple-600" data-modal-tags="Data Extraction,Research,Analysis" data-modal-title="Web Scraping">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-purple-100 p-3 mr-4">
+<i class="fas fa-spider text-purple-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">Web Scraping</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Experience in extracting and analyzing data from websites for research and business intelligence.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-purple-50 text-purple-700">Data Extraction</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Research</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Analysis</span>
+</div><br>
+<button class="skill-detail-link inline-block mt-4 text-purple-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<!-- Automation Skill Card 3: AI Tools -->
+<div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Familiarity with AI-powered tools for enhancing productivity and automating repetitive tasks. I explore and utilize various AI applications to streamline data processing, automate routine accounting functions, and improve overall efficiency in financial operations, contributing to a more technologically advanced approach.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
+<h4>Enhancing Workflows with Intelligent Assistance</h4>
+<p>In an era where efficiency matters as much as expertise, I’ve actively adopted AI tools to enhance the way I learn, work, and deliver. Whether it’s ideating, analyzing, drafting, or designing — I use AI not to replace my skills, but to amplify them.</p>
+
+<h4>Tools I Regularly Use</h4>
+<ul>
+  <li><b>ChatGPT, Claude & Gemini:</b> For tax research, content generation, legal drafting support, and ideation.</li>
+  <li><b>GitHub Copilot:</b> Assists in writing cleaner, faster code — especially in Python automation projects.</li>
+  <li><b>Canva & Design AI Tools:</b> Used for creating professional visuals, social content, and presentations.</li>
+</ul>
+<br>
+<h4>How I Apply AI in Real Work</h4>
+<ul>
+  <li>Speeding up drafting of audit observations, tax replies, and research notes using AI-generated suggestions.</li>
+  <li>Using AI to structure Excel formulas, debug Python code, and brainstorm automation ideas.</li>
+  <li>Designing visually appealing reports and slides without needing advanced graphic skills.</li>
+</ul>
+<br>
+<p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
+&quot;I don’t just use AI for convenience — I use it strategically, to free time for high-impact thinking, storytelling, and execution.&quot;
+</p></i>
+" data-modal-icon="fas fa-robot" data-modal-icon-color="text-purple-600" data-modal-tags="Productivity,Automation,Data Processing" data-modal-title="AI Tools">
+<div class="flex items-center mb-4">
+<div class="hexagon bg-purple-100 p-3 mr-4">
+<i class="fas fa-robot text-purple-600 text-2xl skill-icon"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-800">AI Tools</h3>
+</div>
+<p class="text-gray-600 mb-2 line-clamp-3">Familiarity with AI-powered tools for enhancing productivity and automating repetitive tasks.</p>
+<div class="mt-2 flex flex-wrap gap-1">
+<span class="skill-tag bg-purple-50 text-purple-700">Productivity</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Automation</span>
+<span class="skill-tag bg-purple-50 text-purple-700">Data Processing</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-purple-600 font-medium text-sm">View Skill <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<!-- Experience Section -->
+<section class="py-20 bg-white" id="experience">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">Work <span class="gradient-text">Experience</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+My professional journey showcases a progressive career in finance with an increasing
+focus on
+leveraging technology to drive efficiency and innovation.
+</p>
+</div>
+<div class="timeline">
+<div class="timeline-item timeline-left fade-in" data-aos="fade-right">
+<div class="timeline-content card"><a href="https://www.bagadiyanjain.com/" rel="noopener noreferrer" target="_blank">
+<h3 class="text-xl font-bold text-gray-800">Article Assistant</h3>
+<h4 class="text-blue-600 mb-2">Bagadiya and Jain | July 2023 - Present</h4>
+<p class="text-gray-600 mb-4">
+❖ Completed a dynamic articleship across audit, taxation, litigation, and compliance for clients with ₹1–100 Cr turnover in diverse industries, gaining hands-on exposure to real business environments.
+</p>
+<p class="text-gray-600 mb-4">
+❖ Independently managed reconciliations, returns, and documentation while leveraging tools like Tally, Excel, and Python to enhance accuracy, automation, and audit efficiency.
+</p>
+<div class="mt-3 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Audit</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Taxation</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Compliance</span>
+</div>
+</div></a>
+</div>
+<div class="timeline-item timeline-right fade-in" data-aos="fade-left">
+<div class="timeline-content card">
+<h3 class="text-xl font-bold text-gray-800">Moot Court Participant</h3>
+<h4 class="text-blue-600 mb-2">HS Mehta &amp; Associates | January 2025 – Present</h4>
+<p class="text-gray-600 mb-4">
+❖ Participated in moot court competitions simulating real-world tax and corporate litigation, where I honed my skills in legal interpretation, strategic argumentation, and persuasive communication — building a strong foundation for handling assessments, appeals, and client representation.
+</p>
+<div class="mt-3 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Litigation</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Direct Tax</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Communication</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20">
+<h3 class="text-2xl font-bold mb-8 text-center text-gray-800" data-aos="fade-up">Education &amp; Certifications</h3>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="card p-6 bg-white fade-in" data-aos="fade-up">
+<div class="flex items-start">
+<div class="text-4xl text-blue-500 mr-4">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">Bachelor of Commerce (Honors)</h4>
+<p class="text-blue-600 mb-2">GLS University | 2022 – 2025</p>
+<p class="text-gray-600">
+                    Major in Taxation and Accountancy. Graduated with honors.
+                </p>
+</div>
+</div>
+</div>
+<div class="card p-6 bg-white fade-in" data-aos="fade-up" data-aos-delay="100">
+<div class="flex items-start">
+<div class="text-4xl text-blue-500 mr-4">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">CA Intermediate</h4>
+<p class="text-blue-600 mb-2">Institute of Chartered Accountants of India | May 2023</p>
+<p class="text-gray-600">
+                    Cleared in <b>1st attempt</b> with exemption in <strong>6/8</strong> subjects.
+                </p>
+</div>
+</div>
+</div>
+<div class="card p-6 bg-white fade-in" data-aos="fade-up" data-aos-delay="200">
+<div class="flex items-start">
+<div class="text-4xl text-blue-500 mr-4">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">CA Foundation</h4>
+<p class="text-blue-600 mb-2">Institute of Chartered Accountants of India | May 2022</p>
+<p class="text-gray-600">
+                    Cleared in <b>1st attempt</b> with distinction.
+                </p>
+</div>
+</div>
+</div>
+<div class="card p-6 bg-white fade-in" data-aos="fade-up" data-aos-delay="300">
+<div class="flex items-start">
+<div class="text-4xl text-green-500 mr-4">
+<i class="fas fa-school"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">H.S.C (🏆 1st in school)</h4>
+<p class="text-blue-600 mb-2">Gujarat Higher Secondary Education Board | March 2022</p>
+<p class="text-gray-600">
+                    Cleared with 91.6% (99.64 percentile).
+                </p>
+</div>
+</div>
+</div>
+<div class="card p-6 bg-white fade-in" data-aos="fade-up" data-aos-delay="400">
+<div class="flex items-start">
+<div class="text-4xl text-green-500 mr-4">
+<i class="fas fa-school"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">S.S.C</h4>
+<p class="text-blue-600 mb-2">Gujarat Higher Secondary Education Board | March 2020</p>
+<p class="text-gray-600">
+                    Cleared with 89.5% (99.66 percentile)
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div></div></section>
+<!-- Projects Section -->
+<section class="py-20 bg-gray-50" id="projects">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">Featured <span class="gradient-text">Projects</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+A showcase of my work that demonstrates how I've applied my domain expertise and
+technical skills to solve real-world business challenges.
+</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project Card 1: Moot Court Session 1 -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-modal-description="Defended a case on disallowance on carry forward of losses due to amalgamation of two loss making companies through rigorous understanding of the provisions of Income Tax Act, 1961. This project honed my analytical skills, legal research abilities, and persuasive argumentation.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+<h4 class=&quot;text-lg font-semibold mb-2&quot;>Moot Court Simulation – Defending Amalgamation Revival Against Tax Avoidance Allegations</h4>
+
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing before CIT(A) — tested real-world advocacy skills in a controlled tribunal setting.</p>
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p><strong>Theme:</strong> Section 72A | Amalgamation | Loss Set-off | Tax Litigation Strategy</p>
+<p><strong>Objective:</strong> To demonstrate that the amalgamation was driven by genuine business revival intent and not tax avoidance, thereby justifying the assessee’s claim for set-off.</p>
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Approach:</h4>
+<ul class=&quot;modal-description&quot;>
+  <li>Interpreted and applied Section 72A(1) and (2) with precision.</li>
+  <li>Mapped statutory conditions to actual business facts, including continuity of business, asset retention, and post-merger profitability.</li>
+  <li>Justified management continuity as a strategic necessity, not a tax loophole.</li>
+  <li>Highlighted post-merger profits of ₹16.33 Cr to establish revival intent.</li>
+  <li>Cited judicial precedents to show that tax benefit does not negate commercial substance.</li>
+</ul>
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Outcome:</h4>
+<p>Built a winning defense that secured the assessee’s right to claim set-off under Section 72A by demonstrating compliance, revival, and regulatory legitimacy.</p>
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Skills Demonstrated:</h4>
+<ul class=&quot;modal-description&quot;>
+  <li >Tax Law Interpretation</li>
+  <li >Litigation Strategy</li>
+  <li >Statutory Mapping</li>
+  <li >Legal Drafting & Oral Advocacy</li>
+  <li >Cross-functional Reasoning</li>
+</ul>
+" data-modal-icon="fas fa-gavel" data-modal-icon-color="text-blue-600" data-modal-image="https://placehold.co/600x400/E0E7FF/3B82F6?text=Moot+Court+1" data-modal-tags="Income Tax,Teamwork,Analytics" data-modal-title="Moot Court Session 1" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+<i class="fas fa-gavel text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Moot Court Session 1</h3>
+<p class="text-gray-600 mb-2 line-clamp-5">
+            Defended a case on disallowance on carry forward of losses due to amalgamation of two loss making
+            companies through rigorous understanding of the provisions of Income Tax Act, 1961.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Income Tax</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Teamwork</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Analytics</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+<!-- Project Card 2: Moot Court Session 2 -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="As a department representative, I debated on the setting of Arm’s Length Price and Transfer Pricing Adjustments under the Transfer Pricing provisions of Income Tax Act, 1961. This involved deep research into international tax laws and effective presentation skills.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+<h4 class=&quot;text-lg font-semibold mb-2&quot;>Moot Court Session – Transfer Pricing &amp; DTAA Litigation</h4>
+
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing on cross-border tax disputes — focused on transfer pricing adjustments and DTAA interpretation.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p><strong>Theme:</strong> Transfer Pricing Adjustment | DTAA Interpretation | International Taxation</p>
+<p><strong>Objective:</strong> To prove that the assessee’s pricing of international transactions was not at arm’s length, and to support the TPO’s adjustments by applying correct TP methods and identifying DTAA violations.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Context:</h4>
+<p>Presented departmental arguments in a high-stakes simulated case involving cross-border transactions between an Indian entity (MIPL) and its associated enterprise in Germany, USA, and UAE. The core issues involved Transfer Pricing adjustments, downward profit shifts, and treaty misuse under DTAA.</p>
+<p>I was promoted as the session coordinator for my team in this second moot court session — entrusted with leading the preparation and coordinating the strategy for our side.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Approach:</h4>
+<ul>
+  <li>Rebutted internal CUP method used by the assessee due to insufficient third-party volume (less than 20%) and supported use of external comparables under Rule 10B(1)(a).</li>
+  <li>Emphasized mandatory adjustments for volume discounts and geographic differences while applying the CUP method.</li>
+  <li>Argued for upward adjustment in Germany transaction based on non-compliance with TP principles.</li>
+  <li>Highlighted the incorrect TDS rate under India-USA DTAA due to lack of TRC/Form 10F, resulting in disallowance under Section 40(a)(i).</li>
+  <li>Interpreted &quot;beneficial ownership&quot; under Article 10(2) and OECD commentary to counter treaty benefit claims.</li>
+  <li>Identified downward adjustment in UAE case as treaty abuse by using partial lines from the case document that shifted the interpretation in favor of the department.</li>
+</ul>
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Outcome:</h4>
+<p>Successfully defended the department’s position by exposing procedural lapses, validating the TPO’s methodology, and applying DTAA provisions with strategic interpretation. The UAE transaction became a turning point, where detailed textual analysis shifted the narrative in favor of the department.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Skills Demonstrated:</h4>
+<ul>
+  <li>Transfer Pricing Analysis</li>
+  <li>DTAA Application</li>
+  <li>Legal Interpretation</li>
+  <li>International Tax Structuring</li>
+  <li>Oral Litigation Strategy</li>
+  <li>Cross-border Taxation</li>
+</ul>
+
+<p class=&quot;text-sm italic mt-3&quot;>&quot;This session sharpened my understanding of real-world TP litigation and reinforced the interplay between facts, finance, and international tax law.&quot;</p>
+" data-modal-icon="fas fa-balance-scale" data-modal-icon-color="text-green-600" data-modal-image="https://placehold.co/600x400/D1FAE5/10B981?text=Moot+Court+2" data-modal-tags="Income Tax,Leadership,Transfer Pricing" data-modal-title="Moot Court Session 2 (Co-ordinator)" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-green-400 to-teal-500 flex items-center justify-center">
+<i class="fas fa-balance-scale text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Moot Court Session 2 <br/>(Co-ordinator)<br/></h3>
+<p class="text-gray-600 mb-2 line-clamp-3">
+            As a department representative debated on the setting of Arm’s Length Price and Transfer Pricing Adjustments
+            under the Transfer Pricing provisions of Income Tax Act, 1961.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Income Tax</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Leadership</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Transfer Pricing</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+<!-- Project Card 3: Moot Court Session 3 -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Being on the department side, I debated the addition of Income of the assessee under the search and seizure provisions of the Income Tax Act, 1961. This project enhanced my strategic thinking and ability to articulate complex legal arguments under pressure.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+&lt;h4 class=&quot;text-lg font-semibold mb-2&quot;&gt;Moot Court Session – Litigation on Cash Loans &amp; Section 69A&lt;/h4&gt;
+&lt;p class=&quot;text-sm italic text-gray-600 mb-4&quot;&gt;Role: Department-side Representative | Session Coordinator&lt;/p&gt;
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+&lt;p&gt;&lt;strong&gt;Theme:&lt;/strong&gt; Evidentiary Value of Seized Documents | Section 69A | Third-party Search | Cash Transactions&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Context:&lt;/strong&gt; Presented departmental arguments in a simulated tax proceeding involving ₹5 crore of unexplained cash loans uncovered during a search at a third-party location. The case revolved around whether such evidence could be validly used against the assessee, and whether additions under Section 69A were justified.&lt;/p&gt;
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+&lt;h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;&gt;Strategic Approach:&lt;/h4&gt;
+&lt;ul class=&quot;list-disc pl-6&quot;&gt;
+  &lt;li&gt;Cited the precedent of &lt;strong&gt;Mahavir Woollen Mills&lt;/strong&gt; to establish that third-party documents can hold evidentiary value if nexus is proven.&lt;/li&gt;
+  &lt;li&gt;Mapped physical evidence from the seized diary to the assessee’s financial behavior, highlighting structured cash transactions outside recorded books.&lt;/li&gt;
+  &lt;li&gt;Contested the assessee’s delayed retraction and relied on earlier statements given under oath during the search proceedings.&lt;/li&gt;
+  &lt;li&gt;Argued that the onus was on the assessee to disprove the authenticity of the documents, which they failed to discharge.&lt;/li&gt;
+  &lt;li&gt;Explained the scope of “books of account” under Section 2(12A) to justify the use of seized material as valid documentary evidence.&lt;/li&gt;
+&lt;/ul&gt;
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+&lt;h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;&gt;Outcome:&lt;/h4&gt;
+&lt;p&gt;Successfully defended the addition under Section 69A by demonstrating the link between the seized evidence and the assessee’s unaccounted funds, while discrediting the delayed affidavit as lacking evidentiary strength.&lt;/p&gt;
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+&lt;h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;&gt;Skills Demonstrated:&lt;/h4&gt;
+&lt;ul class=&quot;list-disc pl-6&quot;&gt;
+  &lt;li&gt;Legal Reasoning &amp; Section Mapping&lt;/li&gt;
+  &lt;li&gt;Case Law Application&lt;/li&gt;
+  &lt;li&gt;Handling Evidentiary Objections&lt;/li&gt;
+  &lt;li&gt;Litigation Structuring &amp; Argument Framing&lt;/li&gt;
+&lt;/ul&gt;
+
+<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+&lt;p class=&quot;text-sm italic mt-3&quot;&gt;&quot;This was my third moot court session, and I was again the &lt;strong&gt;Session Coordinator&lt;/strong&gt;—an opportunity to lead my team, strategize legal arguments, and present before senior experts with clarity and confidence.&quot;&lt;/p&gt;
+" data-modal-icon="fas fa-project-diagram" data-modal-icon-color="text-amber-600" data-modal-image="https://placehold.co/600x400/FFEFD5/FFA500?text=Moot+Court+3" data-modal-tags="Income Tax,Leadership,Search &amp; Seizure" data-modal-title="Moot Court Session 3 (Co-ordinator)" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center">
+<i class="fas fa-project-diagram text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Moot Court Session 3 <br/>(Co-ordinator)<br/></h3>
+<p class="text-gray-600 mb-2 line-clamp-3">
+            Being on department side debated the addition of Income of the assessee under the search and seizure provisions of the Income Tax Act, 1961.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Income Tax</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Leadership</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Search &amp; Seizure</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+<!-- Project Card 4: SpeedB 3.0 -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-modal-description="Developed a Python tool for automating the download process of bulk GSTR 2B from the GST Portal. This project significantly reduced manual work from a day to just 15 minutes, while maintaining high accuracy. It highlights my practical application of programming for efficiency.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+<h4 class=&quot;text-lg font-semibold mb-2&quot;>SpeedB 3.0 – GSTR-2B Download Automation Tool</h4>
+
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Python-based automation tool built to bulk-download GSTR-2B reports from the GST portal, reducing hours of manual work to a streamlined one-click process.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p><strong>Tech Stack:</strong> Python, Selenium, xlwings, Excel, Tkinter</p>
+
+<p><strong>Project Objective:</strong> Automate a high-volume, error-prone compliance task using browser automation and Excel-based workflow control — eliminating the need for manual logins, navigation, and file handling.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Key Features and Implementation:</h4>
+<ul>
+  <li><strong>Full Web Automation:</strong> Automated login flows, CAPTCHA handling, dynamic drop-downs, and radio button selections using Selenium and wait strategies.</li>
+  <li><strong>Excel Workflow Integration:</strong> Dynamically fetched GSTINs and periods from Excel, updated download status and timestamps in real time.</li>
+  <li><strong>Organized File Management:</strong> Saved downloads into structured client folders for accurate audit trail and review.</li>
+  <li><strong>Error Handling:</strong> Integrated retry logic, structured logging, and user fallback options for reliability during high-traffic days.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Impact and Results:</h4>
+<ul>
+  <li>Reduced GSTR-2B retrieval time from a full workday to under 15 minutes.</li>
+  <li>Saved 5–10 minutes per GSTIN across 150+ clients each month.</li>
+  <li>Improved filing accuracy, reduced deadline stress, and lowered manual effort.</li>
+  <li>Created a repeatable framework for future automation tools in tax compliance.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p class=&quot;text-sm italic mt-3&quot;>&quot;This project showcases my ability to solve operational challenges through smart automation, combining precision with practical compliance insights.&quot;</p>
+" data-modal-icon="fas fa-download" data-modal-icon-color="text-red-600" data-modal-image="https://placehold.co/600x400/FFD1DC/FF0000?text=SpeedB+3.0" data-modal-tags="Python,Automation,GST,Efficiency" data-modal-title="SpeedB 3.0" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-red-400 to-pink-500 flex items-center justify-center">
+<i class="fas fa-download text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">SpeedB 3.0</h3>
+<p class="text-gray-600 mb-2 line-clamp-3">
+            Developed a Python tool for automating the download process of bulk GSTR 2B from the GST Portal. Reduced manual work of a day to just 15 minutes with accuracy.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Automation</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">GST</span>
+<span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Efficiency</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+<!-- Project Card 5: AutoChallanX -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="A Python tool for automatically preparing and downloading GST payable challans directly from your GST workings with a single click. This tool ensures accuracy while saving significant time and effort, demonstrating my ability to develop practical automation solutions for manual tasks.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+<h4 class=&quot;text-lg font-semibold mb-2&quot;>AutoChallanX – GST Challan Generation Automation Tool</h4>
+
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>A Python-based tool that automates the generation of GST payable challans by connecting directly to reconciliation data in Excel, ensuring accuracy and reducing manual overhead.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p><strong>Tech Stack:</strong> Python, Selenium, Excel (OpenPyXL), Tkinter</p>
+
+<p><strong>Project Objective:</strong> Build a reliable automation layer over the GST portal to reduce errors, save time, and simplify the tax challan creation process — especially useful during high-pressure filing days.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Key Features and Implementation:</h4>
+<ul>
+  <li><strong>Portal Automation:</strong> Automatically logs into the GST portal and fills challan details using Selenium, avoiding common errors in manual entry.</li>
+  <li><strong>Excel Integration:</strong> Reads tax payable figures directly from a live GST reconciliation Excel workbook, ensuring consistency and eliminating duplicate entry.</li>
+  <li><strong>Resilience and Maintenance:</strong> Auto-updates Chromedriver versions, incorporates fallback alerts, and supports robust error handling for real-world use.</li>
+  <li><strong>User Experience:</strong> Equipped with a minimal-click GUI for guided interaction, ideal for tax teams during filing deadlines.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Impact and Results:</h4>
+<ul>
+  <li>Minimized risk of overpayment or misclassification of GST liabilities.</li>
+  <li>Enabled fast, stress-free challan generation for multiple clients.</li>
+  <li>Improved confidence in final tax payment steps of the compliance cycle.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p class=&quot;text-sm italic mt-3&quot;>&quot;AutoChallanX reflects my approach to building precise, user-friendly tools that address operational pain points in compliance workflows — with accuracy and efficiency at the core.&quot;</p>
+" data-modal-icon="fas fa-robot" data-modal-icon-color="text-purple-600" data-modal-image="https://placehold.co/600x400/E6E6FA/800080?text=AutoChallanX" data-modal-tags="Python,Automation,GST,Accuracy" data-modal-title="AutoChallanX" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-purple-400 to-indigo-500 flex items-center justify-center">
+<i class="fas fa-robot text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">AutoChallanX</h3>
+<p class="text-gray-600 mb-2 line-clamp-3">
+            A Python tool for automatically preparing and downloading GST payable challans directly from
+            your GST workings with a single click, maintaining accuracy with saving time and efforts.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Automation</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">GST</span>
+<span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Accuracy</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+<!-- Project Card 6: GST Verifier -->
+<div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="An API based Python tool for verifying the GST Number and getting its details with just a single click, eliminating the need to visit the official GST portal. This project showcases my ability to integrate external APIs for efficient data retrieval and process automation.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+<h4 class=&quot;text-lg font-semibold mb-2&quot;>GSTIN Verifier – API-Based Supplier Verification Tool</h4>
+
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>A Python-based tool designed to instantly verify supplier GSTINs via API calls, eliminating the need to manually enter CAPTCHAs on the GST portal.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p><strong>Tech Stack:</strong> Python, GST Public API, Requests, JSON, Tkinter</p>
+
+<p><strong>Project Objective:</strong> Simplify and accelerate the process of validating a supplier’s GST registration by providing a one-click alternative to the CAPTCHA-heavy GST portal interface.</p>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Key Features and Implementation:</h4>
+<ul>
+  <li><strong>Single GSTIN Verification:</strong> Allows entry of one GST number at a time and retrieves key details like legal name, trade name, state, and registration status.</li>
+  <li><strong>API-Driven Simplicity:</strong> Bypasses the GST portal’s CAPTCHA challenge using public APIs, streamlining routine vendor validation tasks.</li>
+  <li><strong>User-Friendly Interface:</strong> Built with a minimal GUI using Tkinter for quick access by tax professionals or accountants.</li>
+  <li><strong>Reliability and Clarity:</strong> Displays real-time information cleanly, allowing for quick decision-making during vendor onboarding or compliance reviews.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Impact and Results:</h4>
+<ul>
+  <li>Eliminated the repetitive need to solve CAPTCHAs on the GST portal for each verification.</li>
+  <li>Improved speed and ease of supplier GSTIN verification during tax season or audit preparation.</li>
+  <li>Served as a reliable support tool for quick, on-demand registration checks.</li>
+</ul>
+
+ <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
+
+<p class=&quot;text-sm italic mt-3&quot;>&quot;This project highlights my ability to identify friction points in day-to-day compliance workflows and address them with smart, practical automation solutions.&quot;</p>
+" data-modal-icon="fas fa-network-wired" data-modal-icon-color="text-cyan-600" data-modal-image="https://placehold.co/600x400/B2EBF2/00BCD4?text=GST+Verifier" data-modal-tags="Python,Automation,GST,API" data-modal-title="GST Verifier" data-modal-type="project">
+<div class="h-48 bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
+<i class="fas fa-network-wired text-5xl text-white"></i>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">GST Verifier</h3>
+<p class="text-gray-600 mb-2 line-clamp-3">
+            An API based Python tool for verifying the GST Number and getting its details with just a single click, eliminating the need to visit GST portal.
+        </p>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Automation</span>
+<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">GST</span>
+<span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">API</span>
+</div>
+<button class="skill-detail-link inline-block mt-4 text-blue-600 font-medium text-sm">View Project <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- LinkedIn Section -->
+<section class="py-20 bg-white" id="LinkedIn">
+<div class="container mx-auto px-4 max-w-6xl">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">LinkedIn <span class="gradient-text">Posts</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+<b>What I share on LinkedIn reflects what I’m learning, leading, and contributing.</b><br/>
+                Here are glimpses of the conversations I’ve sparked, the ideas I’ve explored, and the community I’ve built.
+            </p>
+</div>
+<!-- Elfsight LinkedIn Feed | Soham's LinkedIn feed -->
+<div class="linkedin-feed-container" data-aos="fade-up" data-aos-delay="100">
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+  <div class="elfsight-app-0103601d-7491-48bf-9817-e988c955a327" data-elfsight-app-lazy></div>
+</div>
+
+</div>
+</section>
+<!-- Endorsements Section (New) -->
+<section class="py-20 bg-gray-50" id="endorsements">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">Endorsements &amp; <span class="gradient-text">Testimonials</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                Kind words from those I've worked with and learned from.
+            </p>
+</div>
+<div class="endorsement-slider max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+<div class="endorsement-track flex">
+<!-- Endorsement Item 1 -->
+<div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
+<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-blue-200" src="https://placehold.co/100x100/A0D0E0/007bff?text=Client+1"/>
+<p class="text-lg text-gray-700 italic mb-4">"Soham is an incredibly diligent and insightful professional. His dedication to understanding complex tax laws and his ability to propose practical solutions truly set him apart. A valuable asset to any team!"</p>
+<h4 class="font-bold text-gray-800">Ms. Jane Doe</h4>
+<p class="text-sm text-gray-500">Senior Accountant, ABC Corp</p>
+</div>
+<!-- Endorsement Item 2 -->
+<div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
+<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-green-200" src="https://placehold.co/100x100/D0E0A0/28a745?text=Client+2"/>
+<p class="text-lg text-gray-700 italic mb-4">"Working with Soham on our recent compliance project was a breeze. His attention to detail and proactive approach ensured everything was handled smoothly and efficiently. Highly recommend!"</p>
+<h4 class="font-bold text-gray-800">Mr. John Smith</h4>
+<p class="text-sm text-gray-500">Operations Manager, XYZ Ltd.</p>
+</div>
+<!-- Endorsement Item 3 -->
+<div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
+<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-purple-200" src="https://placehold.co/100x100/E0A0D0/6f42c1?text=Client+3"/>
+<p class="text-lg text-gray-700 italic mb-4">"Soham's technical acumen, especially with automation tools, is impressive. He transformed our manual data processes, saving us countless hours. A true innovator in the finance domain."</p>
+<h4 class="font-bold text-gray-800">Dr. Emily White</h4>
+<p class="text-sm text-gray-500">Financial Analyst, DataSolutions Inc.</p>
+</div>
+</div>
+<!-- Slider Dots -->
+<div class="flex justify-center mt-6 space-x-2">
+<span class="endorsement-dot w-3 h-3 bg-blue-500 rounded-full cursor-pointer transition-colors duration-300"></span>
+<span class="endorsement-dot w-3 h-3 bg-gray-300 rounded-full cursor-pointer transition-colors duration-300"></span>
+<span class="endorsement-dot w-3 h-3 bg-gray-300 rounded-full cursor-pointer transition-colors duration-300"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-20 bg-gray-50" id="contact">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16" data-aos="fade-up">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="gradient- text">Touch</span></h2>
+<div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
+<p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+I’d love to hear from you.
+If you’re interested in working together, discussing ideas, or just want to say hello, feel free to reach out.
+</p>
+</div>
+<div class="flex flex-col md:flex-row gap-10">
+<div class="md:w-1/2 fade-in" data-aos="fade-right">
+<div class="bg-white p-8 rounded-lg shadow-sm card">
+<h3 class="text-2xl font-bold mb-6 text-gray-800">Contact Information</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="text-2xl text-blue-500 mr-4">
+<i class="fas fa-envelope"></i>
+</div>
+<div>
+<h4 class="font-bold text-gray-800">Email</h4>
+<p class="text-gray-600">sohampokar810@gmail.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="text-2xl text-blue-500 mr-4">
+<i class="fas fa-map-marker-alt"></i>
+</div>
+<div>
+<h4 class="font-bold text-gray-800">Location</h4>
+<p class="text-gray-600">Ahmedabad, Gujarat, India</p>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h4 class="font-bold text-gray-800 mb-4">Connect With Me</h4>
+<div class="flex space-x-4">
+<a class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B59P10I1jRweR6NX7%2FqyNdA%3D%3D">
+<i class="fab fa-linkedin-in"></i>
+</a>
+<a href="mailto:sohampokar810@gmail.com" rel="noopener noreferrer" target="_blank"
+   class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition animated-icon">
+  <i class="fas fa-envelope text-xl"></i>
+</a>
+
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 fade-in" data-aos="fade-left">
+<div class="bg-white p-8 rounded-lg shadow-sm card">
+<h3 class="text-2xl font-bold mb-6 text-gray-800">Send Me a Message</h3>
+<form action="https://formspree.io/f/movwejjj" class="space-y-6" id="contact-form" method="POST">
+<div>
+<label class="block text-gray-700 mb-2" for="name">Name</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="name" name="name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-gray-700 mb-2" for="email">Email</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="email" name="_replyto" required="" type="email"/>
+</div>
+<div>
+<label class="block text-gray-700 mb-2" for="subject">Subject</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="subject" name="_subject" required="" type="text"/>
+</div>
+<div>
+<label class="block text-gray-700 mb-2" for="message">Message</label>
+<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="message" name="message" required="" rows="5"></textarea>
+</div>
+<div>
+<button class="btn-gradient px-8 py-3 rounded-full font-medium w-full" type="submit">
+Send Message
+</button>
+</div>
+</form>
+<div class="mt-4 text-center hidden" id="form-message">
+<p class="text-green-600 font-medium">Your message has been sent successfully!
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-10">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<div class="mb-6 md:mb-0">
+<h2 class="text-2xl font-bold gradient-text">Soham Patel</h2>
+<p class="text-gray-400 mt-2">CA Finalist &amp; Tech Enthusiast</p>
+</div>
+<div class="flex space-x-6">
+<a class="text-gray-400 hover:text-white transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEKY%2Bs7OVSOSSJ9bmnBEG%2FQ%3D%3D">
+<i class="fab fa-linkedin-in"></i>
+</a>
+<a href="mailto:sohampokar810@gmail.com" rel="noopener noreferrer" target="_blank"
+   class="text-gray-400 hover:text-white transition animated-icon">
+  <i class="fas fa-envelope text-xl"></i>
+</a>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items- center">
+<p class="text-gray-400 text-sm mb-4 md:mb-0">
+© <span id="current-year"></span> Soham Patel. All rights reserved.
+</p>
+<div class="flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-6">
+<a class="text-gray-400 hover:text-white text-sm transition" href="#home">Home</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#about">About</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#skills">Skills</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#experience">Experience</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#projects">Projects</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#LinkedIn">LinkedIn</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#endorsements">Endorsements</a>
+<a class="text-gray-400 hover:text-white text-sm transition" href="#contact">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Back to Top Button -->
+<button class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg transform scale-0 transition-transform duration-300 hover:bg-blue-700 focus:outline-none" id="back-to-top">
+<i class="fas fa-arrow-up"></i>
+</button>
+<!-- Modal Structure (Hidden by default) -->
+<div class="modal-overlay" id="infoModal">
+<div class="modal-content">
+<button class="modal-close-button" id="closeModal">×</button>
+<div class="flex items-center mb-4">
+<div class="hexagon p-3 mr-4" id="modal-icon-container">
+<i class="text-2xl" id="modal-icon"></i>
+</div>
+<h3 class="text-2xl font-bold text-gray-800" id="modal-title"></h3>
+</div>
+<img alt="Project Image" class="w-full h-48 object-cover rounded-md mb-4 hidden" id="modal-image" src=""/>
+<p class="text-gray-700 mb-4" id="modal-description"></p>
+<div class="flex flex-wrap gap-2 mb-4" id="modal-tags"></div>
+<!-- Optional: Add project links here if needed -->
+<!-- <a id="modal-project-link" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center mt-4 hidden">
+            View Live Demo <i class="fas fa-external-link-alt ml-2"></i>
+        </a> -->
+</div>
+</div>
+<!-- AOS (Animate On Scroll) JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    AOS.init({
+        duration: 800,
+        once: true, // Whether animation should happen only once - while scrolling down
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for fixed header
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    });
+
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('scale-0');
+            backToTopButton.classList.add('scale-100');
+        } else {
+            backToTopButton.classList.remove('scale-100');
+            backToTopButton.classList.add('scale-0');
+        }
+    });
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Fade-in animation on scroll (for elements not covered by AOS)
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeInOnScroll = () => {
+        fadeElements.forEach(element => {
+            // Only apply if AOS isn't already handling it to avoid double animation
+            if (!element.hasAttribute('data-aos')) {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            }
+        });
+    };
+    window.addEventListener('scroll', fadeInOnScroll);
+    window.addEventListener('load', fadeInOnScroll);
+
+
+    // Skill bar animation (already present)
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const animateSkillBars = () => {
+        skillBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            bar.style.width = width;
+        });
+    };
+    window.addEventListener('load', () => {
+        setTimeout(animateSkillBars, 500);
+    });
+
+    // Number counter animation (already present)
+    const numberCounters = document.querySelectorAll('.number-counter');
+    const animateCounters = () => {
+        numberCounters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.textContent = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            updateCounter();
+        });
+    };
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                counterObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.5 });
+    if (numberCounters.length > 0) {
+        // Observe the parent container of the number counters
+        counterObserver.observe(document.querySelector('.number-counter').parentElement.parentElement);
+    }
+
+    // Contact form submission (already present)
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            // Using Formspree for actual email sending
+            const formUrl = contactForm.action;
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(formUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formMessage.textContent = 'Your message has been sent successfully!';
+                    formMessage.classList.remove('hidden', 'text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    contactForm.reset();
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        formMessage.textContent = data.errors.map(error => error.message).join(', ');
+                    } else {
+                        formMessage.textContent = 'Oops! There was an error sending your message.';
+                    }
+                    formMessage.classList.remove('hidden', 'text-green-600');
+                    formMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                formMessage.textContent = 'Network error. Please try again later.';
+                formMessage.classList.remove('hidden', 'text-green-600');
+                formMessage.classList.add('text-red-600');
+            }
+
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+    }
+
+    // Set current year in footer (already present)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Skill category tabs functionality (already present)
+    const tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.category-content').forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            const targetId = tab.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
+    /* Modal Logic */
+    const infoModal = document.getElementById('infoModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalTags = document.getElementById('modal-tags');
+    const modalIcon = document.getElementById('modal-icon');
+    const modalIconContainer = document.getElementById('modal-icon-container');
+    const modalImage = document.getElementById('modal-image');
+    // const modalProjectLink = document.getElementById('modal-project-link'); // If you add project links
+
+    // Open Modal Function
+    function openModal(title, description, tags, iconClass, iconColor, imageUrl, projectLink) {
+        modalTitle.textContent = title;
+        modalDescription.innerHTML = description;
+        document.body.style.overflow = 'hidden';
+
+        // Clear existing tags
+        modalTags.innerHTML = '';
+        if (tags) {
+            tags.split(',').forEach(tagText => {
+                const span = document.createElement('span');
+                span.textContent = tagText.trim();
+                // Dynamically assign tag styles based on icon color for thematic consistency
+                let tagBgClass = 'bg-blue-100';
+                let tagTextColor = 'text-blue-800';
+                if (iconColor.includes('indigo')) {
+                    tagBgClass = 'bg-indigo-100';
+                    tagTextColor = 'text-indigo-800';
+                } else if (iconColor.includes('purple')) {
+                    tagBgClass = 'bg-purple-100';
+                    tagTextColor = 'text-purple-800';
+                } else if (iconColor.includes('green')) {
+                    tagBgClass = 'bg-green-100';
+                    tagTextColor = 'text-green-800';
+                } else if (iconColor.includes('red')) {
+                    tagBgClass = 'bg-red-100';
+                    tagTextColor = 'text-red-800';
+                } else if (iconColor.includes('cyan')) {
+                    tagBgClass = 'bg-cyan-100';
+                    tagTextColor = 'text-cyan-800';
+                } else if (iconColor.includes('amber')) {
+                    tagBgClass = 'bg-amber-100';
+                    tagTextColor = 'text-amber-800';
+                }
+
+
+                span.className = `px-3 py-1 ${tagBgClass} ${tagTextColor} rounded-full text-sm`;
+                modalTags.appendChild(span);
+            });
+        }
+
+        // Update icon
+        modalIcon.className = iconClass;
+        modalIconContainer.className = `hexagon p-3 mr-4 ${iconColor.replace('text-', 'bg-').replace('-600', '-100').replace('-500', '-100')}`; // Set background color for hexagon
+
+        // Handle image for projects
+        if (imageUrl) {
+            modalImage.src = imageUrl;
+            modalImage.classList.remove('hidden');
+        } else {
+            modalImage.classList.add('hidden');
+            modalImage.src = ''; // Clear src
+        }
+
+        // Handle project link (if implemented in modal)
+        // if (projectLink) {
+        //     modalProjectLink.href = projectLink;
+        //     modalProjectLink.classList.remove('hidden');
+        // } else {
+        //     modalProjectLink.classList.add('hidden');
+        // }
+
+        infoModal.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
+
+    // Close Modal Function
+    function closeModal() {
+        infoModal.classList.remove('open');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Event listeners for opening modal on skill cards (whole card clickable)
+    document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.getAttribute('data-modal-title');
+            const description = card.getAttribute('data-modal-description');
+            const tags = card.getAttribute('data-modal-tags');
+            const iconClass = card.getAttribute('data-modal-icon');
+            const iconColor = card.getAttribute('data-modal-icon-color');
+            openModal(title, description, tags, iconClass, iconColor);
+        });
+    });
+
+    // Event listeners for opening modal on project cards (whole card clickable)
+    document.querySelectorAll('.card[data-modal-type="project"]').forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.getAttribute('data-modal-title');
+            const description = card.getAttribute('data-modal-description');
+            const tags = card.getAttribute('data-modal-tags');
+            const imageUrl = card.getAttribute('data-modal-image');
+            const iconClass = card.getAttribute('data-modal-icon');
+            const iconColor = card.getAttribute('data-modal-icon-color');
+            const projectLink = card.getAttribute('data-modal-link'); // If you add a dedicated link attribute
+
+            openModal(title, description, tags, iconClass, iconColor, imageUrl, projectLink);
+        });
+    });
+
+    // Event listener for closing modal
+    closeModalButton.addEventListener('click', closeModal);
+    infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) { // Close when clicking outside modal content
+            closeModal();
+        }
+    });
+
+    /* Endorsement Slider Logic */
+    const endorsementTrack = document.querySelector('.endorsement-track');
+    const endorsementItems = document.querySelectorAll('.endorsement-item');
+    const endorsementDots = document.querySelectorAll('.endorsement-dot');
+    let currentEndorsementIndex = 0;
+
+    const updateEndorsementSlider = (index) => {
+        endorsementTrack.style.transform = `translateX(-${index * 100}%)`;
+        endorsementDots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('bg-blue-500');
+                dot.classList.remove('bg-gray-300');
+            } else {
+                dot.classList.add('bg-gray-300');
+                dot.classList.remove('bg-blue-500');
+            }
+        });
+        currentEndorsementIndex = index;
+    };
+
+    endorsementDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            updateEndorsementSlider(index);
+        });
+    });
+
+    // Auto slide endorsements
+    setInterval(() => {
+        let nextIndex = currentEndorsementIndex + 1;
+        if (nextIndex >= endorsementItems.length) {
+            nextIndex = 0;
+        }
+        updateEndorsementSlider(nextIndex);
+    }, 5000); // Change slide every 5 seconds
+
+    // Initialize first endorsement
+    updateEndorsementSlider(0);
+
+  }); // End DOMContentLoaded
+
+  // Get all the necessary DOM elements
+        const projectCard = document.getElementById('projectCard');
+        const projectModal = document.getElementById('projectModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const closeModalBtn = document.getElementById('closeModal');
+        const closeModalFooterBtn = document.getElementById('closeModalFooter');
+
+        // Function to open the modal with animation
+        const openModal = () => {
+            if (projectModal) {
+                projectModal.classList.remove('hidden');
+                // We use requestAnimationFrame to ensure the display property has changed
+                // before we start the transition.
+                requestAnimationFrame(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalOverlay.classList.add('opacity-100');
+                    modalContent.classList.remove('opacity-0', 'scale-95', '-translate-y-4');
+                    modalContent.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+                });
+                // Prevent background from scrolling
+                document.body.style.overflow = 'hidden';
+            }
+        };
+
+        // Function to close the modal with animation
+        const closeModal = () => {
+            if (projectModal) {
+                modalOverlay.classList.add('opacity-0');
+                modalOverlay.classList.remove('opacity-100');
+                modalContent.classList.add('opacity-0', 'scale-95', '-translate-y-4');
+                modalContent.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+
+                // Wait for the transition to finish before hiding the modal
+                setTimeout(() => {
+                    projectModal.classList.add('hidden');
+                     // Restore background scrolling
+                    document.body.style.overflow = '';
+                }, 300); // This duration should match your CSS transition duration
+                
+            }
+        };
+
+        // Event Listeners
+        // Click on the card to open the modal
+        if (projectCard) {
+            projectCard.addEventListener('click', openModal);
+        }
+
+        // Click on the close button (X) to close the modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        // Click on the footer close button
+        if(closeModalFooterBtn) {
+            closeModalFooterBtn.addEventListener('click', closeModal);
+        }
+
+        // Click on the overlay (outside the modal content) to close it
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', closeModal);
+        }
+        
+        // Press the 'Escape' key to close the modal
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !projectModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        // Scroll progress bar logic
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progress-bar").style.width = scrollPercent + "%";
+});
+
+// Highlight active navbar link
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a");
+
+function activateNavOnScroll() {
+  let scrollY = window.pageYOffset;
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 100;
+    const sectionHeight = section.offsetHeight;
+    const sectionId = section.getAttribute("id");
+
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      navLinks.forEach((link) => {
+        link.classList.remove("active-nav");
+        if (link.getAttribute("href").includes(sectionId)) {
+          link.classList.add("active-nav");
+        }
+      });
+    }
+  });
+}
+// On load, trigger the animation
+window.addEventListener('load', () => {
+  const heroText = document.querySelector('.hero-text');
+  heroText.classList.remove('opacity-0', 'translate-y-6');
+  heroText.classList.add('opacity-100', 'translate-y-0');
+});
+
+
+window.addEventListener("scroll", activateNavOnScroll);
+
+// Add event listeners to all category tabs
+document.querySelectorAll('.category-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.getAttribute('data-target');
+
+    // Update active tab style
+    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Hide all sections and reset animation
+    document.querySelectorAll('.category-content').forEach(section => {
+      section.classList.add('hidden');
+      section.classList.remove('fade-slide-in');
+    });
+
+    // Show target section
+    const targetSection = document.getElementById(targetId);
+    targetSection.classList.remove('hidden');
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      targetSection.classList.add('fade-slide-in');
+    });
+  });
+});
+
+
+
+</script>
+</body>
+</html>
