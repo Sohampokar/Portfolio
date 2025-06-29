@@ -7,6 +7,7 @@
   <meta name="description" content="Portfolio of Soham Patel, CA Finalist with hands-on experience in Audit, Taxation, Compliance and tech-powered finance solutions." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://casohampatelportfolio.netlify.app/" />
+  <link rel="icon" href="CA logo.svg" type="svg">
     <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9E185FTHE"></script>
   <script>
@@ -17,18 +18,6 @@
   </script>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com">
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    document.querySelectorAll('.modal').forEach(modal => {
-      modal.classList.add('hidden');
-    });
-  }
-});
-document.querySelectorAll('.modal .close-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    this.closest('.modal').classList.add('hidden');
-  });
-});
 </script>
 <!-- Font Awesome for icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -333,25 +322,31 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
     }
 
     /* Modal Styles */
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        backdrop-filter: blur(4px);
-    }
+/* In your <style> block, find .modal-overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0; /* Or top: 0; left: 0; width: 100%; height: 100%; */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0; /* Starts invisible */
+    visibility: hidden; /* Hidden by default */
+    /* >>> REPLACE THE EXISTING TRANSITION LINE WITH THESE TWO <<< */
+    transition: opacity 0.3s ease; /* Only opacity transitions normally */
+    transition-property: opacity, visibility; /* Explicitly list properties to transition */
+    transition-duration: 0.3s, 0s; /* Opacity takes 0.3s, visibility takes 0s */
+    transition-delay: 0s, 0.3s; /* Visibility changes after opacity finishes when closing */
+    /* >>> END REPLACEMENT <<< */
+
+    backdrop-filter: blur(4px);
+}
     .modal-overlay.open {
         opacity: 1;
         visibility: visible;
+         /* >>> ADD THIS LINE <<< */
+    transition-delay: 0s; /* No delay when opening */
     }
     .modal-content {
         background-color: white;
@@ -593,6 +588,32 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
     margin-bottom: 2rem;
   }
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+.testimonial {
+  transition: opacity 0.5s ease;
+}
+.hidden {
+  display: none;
+}
+/* In your <style> block */
+body.no-scroll {
+    overflow: hidden;
+    position: fixed; /* Prevents jumping on some browsers */
+    width: 100%;
+}
 
 </style>
 </head>
@@ -603,7 +624,7 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 <!-- No Custom Cursor Glow HTML element -->
 <!-- Navigation -->
 <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm flex flex-wrap justify-between items-center">
-<div class="container mx-auto px-4 py-3">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4 py-3">
 <div class="flex justify-between items-center">
 <a class="text-2xl font-bold gradient-text" href="#">Soham's Portfolio</a>
 <div class="hidden md:flex space-x-8">
@@ -638,8 +659,8 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="hero-bg min-h-screen" id="home">
-  <div class="container mx-auto px-4 pt-24 relative">
+<section id="home" class="hero-bg min-h-screen flex items-center pt-16 transition-opacity duration-1000 ease-out opacity-0 translate-y-6 animate-fadeIn">
+  <div class="container max-w-screen-xl mx-auto mx-auto px-4 pt-24 relative">
 
     <!-- Swami Vivekananda Quote -->
     <div class="hero-quote w-full text-center mb-6 md:mb-10 z-20">
@@ -647,7 +668,7 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
         “Arise, awake, and stop not till the goal is reached”
       </p>
       <p class="text-white text-sm md:text-base opacity-70 mt-2">
-        — Swami Vivekananda
+        - Swami Vivekananda
       </p>
     </div>
 
@@ -674,10 +695,11 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
       <div class="md:w-1/2 flex flex-col items-center space-y-6">
         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white shadow-md">
           <img alt="Profile Photo" class="w-full h-full object-cover"
-            src="https://media.licdn.com/dms/image/v2/D4D03AQFSnvYpfc1VWw/profile-displayphoto-shrink_400_400/B4DZea7ssjGUAg-/0/1750651031824?e=1756339200&v=beta&t=Ga8KBpKqCIZAac1pEb9rt1YdjjU6PdhAeuXD2WN_C9U" />
+            src="Profile Image.jpg" />
         </div>
         <a class="flex items-center space-x-3 px-5 py-2 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-colors duration-300"
-          href="https://www.linkedin.com/in/soham-patel-1695aa27b" rel="noopener noreferrer" target="_blank">
+          href="https://www.linkedin.com/in/soham-patel-1695aa27b" rel="noopener noreferrer" target="_blank"
+          onclick="gtag('event', 'linkedin_click', { 'event_category': 'Outbound Link', 'event_label': 'LinkedIn Profile' });">
           <i class="fab fa-linkedin-in text-xl"></i>
           <span>100K+ Impressions</span>
         </a>
@@ -700,7 +722,7 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 
 <!-- About Section -->
 <section class="py-20 bg-white" id="about">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -710,11 +732,11 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 <h3 class="text-2xl font-bold mb-4 text-gray-800">Professional Background</h3>
 <p class="text-gray-600 mb-6">
 I'm a CA Final student with practical experience across Audit, Taxation, Compliance, Litigation, and Financial Reporting, earned through dynamic client engagements during my articleship.
-I’ve worked hands-on with businesses from varied sectors — helping them stay compliant, resolve complex queries, and improve financial clarity through structured analysis and documentation.
+I’ve worked hands-on with businesses from varied sectors - helping them stay compliant, resolve complex queries, and improve financial clarity through structured analysis and documentation.
 </p>
 <p class="text-gray-600 mb-6">
-What distinguishes my journey is a deep inclination towards technology. Whether it's automating reconciliations using Python, enhancing audit workflows with Excel, or applying AI tools for legal research and reporting — 
-I actively build and apply digital skills to reimagine how core CA work gets done. My approach blends domain depth with tech agility — making traditional processes faster, smarter, and future-ready.
+What distinguishes my journey is a deep inclination towards technology. Whether it's automating reconciliations using Python, enhancing audit workflows with Excel, or applying AI tools for legal research and reporting - 
+I actively build and apply digital skills to reimagine how core CA work gets done. My approach blends domain depth with tech agility - making traditional processes faster, smarter, and future-ready.
 </p>
 <div class="grid grid-cols-2 gap-4 mb-6">
 <div>
@@ -734,7 +756,7 @@ I actively build and apply digital skills to reimagine how core CA work gets don
 <p class="text-gray-600">Open to opportunities</p>
 </div>
 </div>
-<a class="btn-gradient px-8 py-3 rounded-full font-medium inline-block" href="#contact">
+<a class="btn-gradient px-8 py-3 rounded-full font-medium inline-block" href="#contact" onclick="gtag('event', 'resume_download', { 'event_category': 'Download', 'event_label': 'Resume PDF' });">
 Download Resume
 </a>
 </div>
@@ -831,7 +853,7 @@ Download Resume
 </div></section>
 <!-- Skills Section -->
 <section class="py-20 bg-gray-50" id="skills">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -846,10 +868,10 @@ Download Resume
     <div class="category-tab active flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-blue-700 cursor-pointer whitespace-nowrap" data-target="core-ca">
       Core CA Skills
     </div>
-    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-indigo-600 cursor-pointer whitespace-nowrap" data-target="tech-tools">
+    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-blue-700 cursor-pointer whitespace-nowrap" data-target="tech-tools">
       Tech Tools &amp; Software
     </div>
-    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-purple-600 cursor-pointer whitespace-nowrap" data-target="automation">
+    <div class="category-tab flex-shrink-0 px-4 py-2 text-sm md:text-base font-semibold rounded-full bg-blue-100 text-blue-700 cursor-pointer whitespace-nowrap" data-target="automation">
       Automation &amp; Programming
     </div>
   </div>
@@ -863,28 +885,28 @@ Download Resume
         <div class="skill-card bg-white p-6 cursor-pointer"
              data-aos="fade-up"
              data-modal-description="<p>Comprehensive expertise in conducting statutory audits and tax audits in compliance with regulatory requirements.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b></P>
-                <h4>From Vouching to Finalization — Owning the Audit Lifecycle</h4><br>
-<p>I began my audit journey with vouching and documentary checks, but soon transitioned into handling full-fledged assignments — from ledger scrutiny to audit report finalization. What set me apart was my attention to detail and a proactive mindset that allowed me to cross-connect data, identify missed compliances, and support decision-making at the client level.</p>
+                <h4>From Vouching to Finalization - Owning the Audit Lifecycle</h4><br>
+<p>I began my audit journey with vouching and documentary checks, but soon transitioned into handling full-fledged assignments - from ledger scrutiny to audit report finalization. What set me apart was my attention to detail and a proactive mindset that allowed me to cross-connect data, identify missed compliances, and support decision-making at the client level.</p>
 
 <h4>Breadth of Exposure</h4>
 <ul>
-  <li>Handled statutory audits across manufacturing, IT, logistics, trading, and service industries — with client turnovers ranging from ₹1 crore to ₹100 crore.</li>
+  <li>Handled statutory audits across manufacturing, IT, logistics, trading, and service industries - with client turnovers ranging from ₹1 crore to ₹100 crore.</li>
   <li>Visited client sites for fieldwork and gained practical insights into business models, accounting systems, and internal controls.</li>
-  <li>Adapted to varying client environments — balancing professional conduct with time-bound deliverables in high-pressure settings.</li>
+  <li>Adapted to varying client environments - balancing professional conduct with time-bound deliverables in high-pressure settings.</li>
 </ul>
 
 <br><h4>Key Contributions</h4>
 <ul>
-  <li>Flagged unrecorded RoDTEP credits and non-compliant GST credit claims missed by seniors — ensuring accurate tax positioning.</li>
+  <li>Flagged unrecorded RoDTEP credits and non-compliant GST credit claims missed by seniors - ensuring accurate tax positioning.</li>
   <li>Discovered errors in final audit reports and rectified them before submission, improving report quality and compliance confidence.</li>
-  <li>Improved audit documentation practices by creating a centralized Excel-based query tracker with linked working papers, statuses, and client responses — adopted across multiple audits.</li>
+  <li>Improved audit documentation practices by creating a centralized Excel-based query tracker with linked working papers, statuses, and client responses - adopted across multiple audits.</li>
 </ul>
 
 <br><h4>Finalization & Financial Reporting</h4>
-<p>In the final phase of audits, I reviewed P&L and Balance Sheets for presentation accuracy, assisted in preparing financial statements, notes, and cash flows — ensuring all outputs met statutory and professional standards. These stages helped me develop a sense of precision, documentation hygiene, and presentation excellence.</p>
+<p>In the final phase of audits, I reviewed P&L and Balance Sheets for presentation accuracy, assisted in preparing financial statements, notes, and cash flows - ensuring all outputs met statutory and professional standards. These stages helped me develop a sense of precision, documentation hygiene, and presentation excellence.</p>
 
 <i><p class=&quot;highlight text-blue-700 font-semibold&quot;>
-&quot;I don’t just audit transactions — I connect patterns, flag risk, and structure insights that help both teams and clients make better decisions.&quot;
+&quot;I don’t just audit transactions - I connect patterns, flag risk, and structure insights that help both teams and clients make better decisions.&quot;
 </p></i>"
              data-modal-icon="fas fa-check-double" 
              data-modal-icon-color="text-blue-600" 
@@ -912,79 +934,37 @@ Download Resume
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="skillModal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 flex items-center justify-center p-4">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl modal-enter">
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                <div class="flex items-center">
-                    <div class="hexagon bg-blue-100 p-3 mr-4">
-                        <i id="modalIcon" class="fas fa-check-double text-blue-600 text-2xl"></i>
-                    </div>
-                    <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Skill Title</h2>
-                </div>
-                <button id="closeModalX" class="text-gray-400 hover:text-gray-600 transition-colors">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <!-- Modal Body -->
-            <div class="p-6">
-                <div id="modalDescription" class="modal-description text-gray-700 mb-6">
-                    <!-- Formatted content will be inserted here -->
-                </div>
-                
-                <!-- Tags Section -->
-                <div class="mb-6">
-                    <h4 class="text-sm font-semibold text-gray-600 mb-2">RELATED SKILLS</h4>
-                    <div id="modalTags" class="flex flex-wrap gap-2">
-                        <div class="mt-2 flex flex-wrap gap-1">
-                            <span class="skill-tag bg-blue-50 text-blue-700">Financial Verification</span>
-                            <span class="skill-tag bg-blue-50 text-blue-700">Compliance</span>
-                            <span class="skill-tag bg-blue-50 text-blue-700">Risk Assessment</span>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-            <!-- Modal Footer -->
-            <div class="flex justify-end p-6 border-t border-gray-200">
-                <button id="closeModalBtn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                    <i class="fas fa-times mr-2"></i>Close
-                </button>
-            </div>
-        </div>
-    </div>
 <!-- Skill Card 2: Direct Taxation -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Expert knowledge in income tax laws, tax planning strategies, and filing requirements for individuals and businesses. This covers ITR filing, advanced tax planning, and providing tailored tax advisory services to minimize liabilities.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
   <h4>Translating Complex Tax Provisions into Clear, Compliant Outcomes</h4>
-<p>From individual returns to corporate tax filings, I’ve worked across the spectrum of direct tax compliance — with a focus on structure, clarity, and accuracy. My strength lies in translating Income Tax provisions into workflows that are efficient and error-free, even in high-volume scenarios.</p>
+<p>From individual returns to corporate tax filings, I’ve worked across the spectrum of direct tax compliance - with a focus on structure, clarity, and accuracy. My strength lies in translating Income Tax provisions into workflows that are efficient and error-free, even in high-volume scenarios.</p>
 
 <h4>Tax Return Filings</h4>
 <ul>
-  <li>Prepared and filed ITR-1 to ITR-6 for salaried individuals, professionals, partnership firms, and companies — ensuring timely compliance and optimized tax positions.</li>
-  <li>Handled returns for IT-sector clients involving complex deductions and exemption claims — aligning with documentation requirements and audit trails.</li>
+  <li>Prepared and filed ITR-1 to ITR-6 for salaried individuals, professionals, partnership firms, and companies - ensuring timely compliance and optimized tax positions.</li>
+  <li>Handled returns for IT-sector clients involving complex deductions and exemption claims - aligning with documentation requirements and audit trails.</li>
 </ul>
 
 <br><h4>Tax Audit Reports</h4>
 <ul>
   <li>Prepared 3CD reports under Section 44AB for clients across multiple sectors, incorporating depreciation schedules, disallowance workings, and ledger breakups.</li>
-  <li>Collaborated with audit teams to sync audit findings with reporting disclosures — reducing post-report discrepancies.</li>
+  <li>Collaborated with audit teams to sync audit findings with reporting disclosures - reducing post-report discrepancies.</li>
 </ul>
 
 <br><h4>Income Tax Notices & Representation</h4>
 <ul>
-  <li>Drafted replies for scrutiny notices under Sections 148, 147, and 143(3) — including notices related to political donations and mismatch issues.</li>
-  <li>Used AI tools to analyze case law, prepare argument flows, and support client response strategies — even without formal appeal involvement.</li>
+  <li>Drafted replies for scrutiny notices under Sections 148, 147, and 143(3) - including notices related to political donations and mismatch issues.</li>
+  <li>Used AI tools to analyze case law, prepare argument flows, and support client response strategies - even without formal appeal involvement.</li>
 </ul>
 
 <br><h4>TDS Compliance & Corrections</h4>
 <ul>
-  <li>Filed quarterly returns for Forms 24Q, 26Q, and 27EQ — including complex cases involving 350+ employee records and multi-section deductions.</li>
+  <li>Filed quarterly returns for Forms 24Q, 26Q, and 27EQ - including complex cases involving 350+ employee records and multi-section deductions.</li>
   <li>Corrected TDS returns using utility tools, addressed PAN mismatches, and coordinated with clients on salary/TDS clarifications.</li>
 </ul>
 
 <br><p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&QUOT;I approach taxation not just as a set of rules — but as a system to be streamlined, understood, and delivered with precision.&QUOT;
+&QUOT;I approach taxation not just as a set of rules - but as a system to be streamlined, understood, and delivered with precision.&QUOT;
 </p></i>
 
 "
@@ -1049,7 +1029,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <!-- Skill Card 4: Compliance & Regulatory Filings -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-modal-description="Proficient in ensuring statutory compliance through timely ROC filings, legal drafting, and structured documentation across various entities.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
 <h4>Supporting Regulatory Compliance with Consistency and Curiosity</h4>
-<p>While most of my core experience lies in taxation and audit, I’ve also assisted with corporate compliance and ROC filings — contributing to timely documentation, form preparation, and company-level legal upkeep. I treated this exposure as an opportunity to understand the broader regulatory ecosystem beyond just numbers.</p>
+<p>While most of my core experience lies in taxation and audit, I’ve also assisted with corporate compliance and ROC filings - contributing to timely documentation, form preparation, and company-level legal upkeep. I treated this exposure as an opportunity to understand the broader regulatory ecosystem beyond just numbers.</p>
 
 <h4>ROC Filings and MCA Compliance</h4>
 <ul>
@@ -1067,7 +1047,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 
 <br><i><p class=&quot;highlight text-blue-700 font-semibold&quot;>
-&quot;Even with limited exposure, I’ve treated every compliance task as a learning ground — where accuracy, presentation, and timing all matter just as much as technical input.&quot;
+&quot;Even with limited exposure, I’ve treated every compliance task as a learning ground - where accuracy, presentation, and timing all matter just as much as technical input.&quot;
 </p></i>
 " data-modal-icon="fas fa-clipboard-check" data-modal-icon-color="text-blue-600" data-modal-tags="ROC Filings,Documentation,Statutory Reports" data-modal-title="Compliance &amp; Regulatory Filings">
 <div class="flex items-center mb-4">
@@ -1092,7 +1072,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <h4>Practical Litigation Experience</h4>
 <ul>
   <li>Drafted replies for Income Tax notices under Sections 143(3), 147, and 148, including cases involving political donations and uncredited tax payments.</li>
-  <li>Handled GST-related litigation by preparing replies to ITC denial notices based on cancelled supplier registrations — argued admissibility under Section 16(2) using relevant case law.</li>
+  <li>Handled GST-related litigation by preparing replies to ITC denial notices based on cancelled supplier registrations - argued admissibility under Section 16(2) using relevant case law.</li>
   <li>Personally visited Income Tax and GST departments to submit responses and assist in follow-ups.</li>
 </ul><br>
 
@@ -1104,7 +1084,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 
 <br><p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;For me, litigation is more than just responding to notices — it's about building credible arguments, interpreting law with clarity, and defending compliance with confidence.&quot;
+&quot;For me, litigation is more than just responding to notices - it's about building credible arguments, interpreting law with clarity, and defending compliance with confidence.&quot;
 </p></i>
 " data-modal-icon="fas fa-gavel" data-modal-icon-color="text-blue-600" data-modal-tags="Appeals,Representation,Dispute Resolution" data-modal-title="Tax Litigation">
 <div class="flex items-center mb-4">
@@ -1124,11 +1104,11 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <!-- Skill Card 6: Financial Reporting -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Skilled in preparing and analyzing financial statements in accordance with applicable accounting standards. My expertise covers detailed financial statement preparation, in-depth analysis, and generation of comprehensive MIS (Management Information System) reports for strategic decision-making.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
 <h4>Turning Financial Data into Meaningful, Compliant Reports</h4>
-<p>I’ve worked on end-to-end financial reporting for a wide variety of entities — from sole proprietorships to private limited companies — covering the full cycle from trial balance to finalized statements. My role included drafting, reviewing, and finalizing reports that met both statutory requirements and management expectations.</p>
+<p>I’ve worked on end-to-end financial reporting for a wide variety of entities - from sole proprietorships to private limited companies - covering the full cycle from trial balance to finalized statements. My role included drafting, reviewing, and finalizing reports that met both statutory requirements and management expectations.</p>
 
 <h4>Preparation & Finalization of Financial Statements</h4>
 <ul>
-  <li>Prepared Profit & Loss accounts, Balance Sheets, and Notes to Accounts for audit clients across various structures — including firms, LLPs, and private companies.</li>
+  <li>Prepared Profit & Loss accounts, Balance Sheets, and Notes to Accounts for audit clients across various structures - including firms, LLPs, and private companies.</li>
   <li>Ensured accurate presentation in line with the Companies Act, Schedule III, and ICAI’s applicable standards for corporate and non-corporate entities.</li>
   <li>Developed comfort with Cash Flow Statement preparation, from early challenges to confidently handling direct and indirect method reports.</li>
 </ul>
@@ -1140,7 +1120,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;Whether it's statutory reporting or internal MIS, I focus on delivering accuracy, structure, and professional clarity — turning numbers into confidence.&quot;
+&quot;Whether it's statutory reporting or internal MIS, I focus on delivering accuracy, structure, and professional clarity - turning numbers into confidence.&quot;
 </p></i>
 " data-modal-icon="fas fa-chart-line" data-modal-icon-color="text-blue-600" data-modal-tags="Financial Statements,Analysis,MIS Reports" data-modal-title="Financial Reporting">
 <div class="flex items-center mb-4">
@@ -1181,7 +1161,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;>
-<i>&quot;For me, Tally isn’t just an accounting software — it’s a platform to build smarter systems for scalable, audit-ready finance processes.&quot;</i>
+<i>&quot;For me, Tally isn’t just an accounting software - it’s a platform to build smarter systems for scalable, audit-ready finance processes.&quot;</i>
 </p>
 " data-modal-icon="fas fa-calculator" data-modal-icon-color="text-indigo-600" data-modal-tags="Accounting,Audit,GST Reports,Financial Statements" data-modal-title="Tally Prime">
 <div class="flex items-center mb-4">
@@ -1204,7 +1184,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <h4>Powering Accuracy and Automation with the Office Suite</h4>
 <p>I’ve leveraged Microsoft Excel, Word, and PowerPoint not just as office tools, but as platforms to streamline audit, tax, and compliance work. My strongest command lies in Excel, where automation, reconciliation, and presentation come together in practical, impactful ways.</p>
 
-<h4>Excel — My Core Workspace</h4>
+<h4>Excel - My Core Workspace</h4>
 <ul>
   <li>Proficient in advanced formulas (INDEX-MATCH, VLOOKUP, SUMIFS), pivot tables, conditional formatting, and Excel shortcuts for fast, error-free reporting.</li>
   <li>Applied Excel to GST and TDS reconciliations, audit analysis, and automated workflows using basic VBA and Python integration.</li>
@@ -1224,7 +1204,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;Excel is where I analyze, Word is where I articulate, and PowerPoint is where I simplify — each tool helping me work smarter across audit and compliance.&quot;
+&quot;Excel is where I analyze, Word is where I articulate, and PowerPoint is where I simplify - each tool helping me work smarter across audit and compliance.&quot;
 </p></i>
 " data-modal-icon="fas fa-file-excel" data-modal-icon-color="text-indigo-600" data-modal-tags="Excel,Word,PowerPoint,Data Analysis" data-modal-title="Microsoft Office Suite">
 <div class="flex items-center mb-4">
@@ -1245,7 +1225,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <!-- Tech Skill Card 3: Winman and Genius -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Proficient in using Winman and Genius software for direct tax calculations, returns, and compliance. I am experienced in accurately filing ITRs, performing complex tax computations, and preparing TDS returns efficiently, ensuring full compliance with direct tax regulations.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
 <h4>Making Compliance Simpler with Specialized Tax Software</h4>
-<p>I’ve worked independently with Winman and Genius software for Income Tax and TDS compliance tasks — from data entry to final report generation. These tools helped streamline the filing process, reduce errors, and ensure timely submissions for a wide variety of clients.</p>
+<p>I’ve worked independently with Winman and Genius software for Income Tax and TDS compliance tasks - from data entry to final report generation. These tools helped streamline the filing process, reduce errors, and ensure timely submissions for a wide variety of clients.</p>
 
 <h4>Core Functional Use</h4>
 <ul>
@@ -1255,7 +1235,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;My goal is not just to operate software — but to make tax compliance more efficient, structured, and error-free through smart tool usage.&quot;
+&quot;My goal is not just to operate software - but to make tax compliance more efficient, structured, and error-free through smart tool usage.&quot;
 </p></i>
 " data-modal-icon="fas fa-file-invoice" data-modal-icon-color="text-indigo-600" data-modal-tags="ITR Filing,Tax Computation,TDS Returns" data-modal-title="Winman and Genius">
 <div class="flex items-center mb-4">
@@ -1285,7 +1265,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;ClearGST helped me go beyond manual filing — enabling accuracy, structure, and scale in GST compliance work.&quot;
+&quot;ClearGST helped me go beyond manual filing - enabling accuracy, structure, and scale in GST compliance work.&quot;
 </p></i>
 " data-modal-icon="fas fa-receipt" data-modal-icon-color="text-indigo-600" data-modal-tags="GSTR Filing,Reconciliation,E-invoicing" data-modal-title="ClearGST">
 <div class="flex items-center mb-4">
@@ -1320,10 +1300,10 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <h4>Why Automation?</h4>
-<p>My goal is to eliminate repetitive work so professionals can focus on judgment, analysis, and strategy. I believe finance needs to evolve — and automation is how we get there.</p>
+<p>My goal is to eliminate repetitive work so professionals can focus on judgment, analysis, and strategy. I believe finance needs to evolve - and automation is how we get there.</p>
 
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;For me, programming isn't just about writing code — it’s about creating scalable solutions that free up time for deeper thinking.&quot;
+&quot;For me, programming isn't just about writing code - it’s about creating scalable solutions that free up time for deeper thinking.&quot;
 </p></i>
 " data-modal-icon="fab fa-python" data-modal-icon-color="text-purple-600" data-modal-tags="Data Analysis,Automation,Scripting" data-modal-title="Python Basics">
 <div class="flex items-center mb-4">
@@ -1343,7 +1323,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <!-- Automation Skill Card 2: Web Scraping -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="Experience in extracting and analyzing data from websites for research and business intelligence. I apply web scraping techniques to gather large datasets, which are then analyzed to provide actionable insights for various financial and market research purposes.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
 <h4>Scraping Smarter: Turning Web Data into Actionable Insight</h4>
-<p>I’ve developed robust web scraping solutions using Python and tools like Selenium and Requests — not just for learning, but to solve real-world compliance and reporting problems. My scripts are built to ensure accuracy, resilience, and full integration into professional workflows.</p>
+<p>I’ve developed robust web scraping solutions using Python and tools like Selenium and Requests - not just for learning, but to solve real-world compliance and reporting problems. My scripts are built to ensure accuracy, resilience, and full integration into professional workflows.</p>
 
 <h4>What I've Built</h4>
 <ul>
@@ -1360,7 +1340,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;My scraping projects don’t just gather data — they power decisions, reduce friction, and automate entire reporting processes.&quot;
+&quot;My scraping projects don’t just gather data - they power decisions, reduce friction, and automate entire reporting processes.&quot;
 </p></i>
 " data-modal-icon="fas fa-spider" data-modal-icon-color="text-purple-600" data-modal-tags="Data Extraction,Research,Analysis" data-modal-title="Web Scraping">
 <div class="flex items-center mb-4">
@@ -1380,12 +1360,12 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 <!-- Automation Skill Card 3: AI Tools -->
 <div class="skill-card bg-white p-6 cursor-pointer" data-aos="fade-up" data-aos-delay="200" data-modal-description="Familiarity with AI-powered tools for enhancing productivity and automating repetitive tasks. I explore and utilize various AI applications to streamline data processing, automate routine accounting functions, and improve overall efficiency in financial operations, contributing to a more technologically advanced approach.<b><hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;></b>
 <h4>Enhancing Workflows with Intelligent Assistance</h4>
-<p>In an era where efficiency matters as much as expertise, I’ve actively adopted AI tools to enhance the way I learn, work, and deliver. Whether it’s ideating, analyzing, drafting, or designing — I use AI not to replace my skills, but to amplify them.</p>
+<p>In an era where efficiency matters as much as expertise, I’ve actively adopted AI tools to enhance the way I learn, work, and deliver. Whether it’s ideating, analyzing, drafting, or designing - I use AI not to replace my skills, but to amplify them.</p>
 
 <h4>Tools I Regularly Use</h4>
 <ul>
   <li><b>ChatGPT, Claude & Gemini:</b> For tax research, content generation, legal drafting support, and ideation.</li>
-  <li><b>GitHub Copilot:</b> Assists in writing cleaner, faster code — especially in Python automation projects.</li>
+  <li><b>GitHub Copilot:</b> Assists in writing cleaner, faster code - especially in Python automation projects.</li>
   <li><b>Canva & Design AI Tools:</b> Used for creating professional visuals, social content, and presentations.</li>
 </ul>
 <br>
@@ -1397,7 +1377,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </ul>
 <br>
 <p class=&quot;highlight text-blue-700 font-semibold&quot;><i>
-&quot;I don’t just use AI for convenience — I use it strategically, to free time for high-impact thinking, storytelling, and execution.&quot;
+&quot;I don’t just use AI for convenience - I use it strategically, to free time for high-impact thinking, storytelling, and execution.&quot;
 </p></i>
 " data-modal-icon="fas fa-robot" data-modal-icon-color="text-purple-600" data-modal-tags="Productivity,Automation,Data Processing" data-modal-title="AI Tools">
 <div class="flex items-center mb-4">
@@ -1420,7 +1400,7 @@ data-modal-icon="fas fa-file-invoice-dollar" data-modal-icon-color="text-blue-60
 </div></section>
 <!-- Experience Section -->
 <section class="py-20 bg-white" id="experience">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">Work <span class="gradient-text">Experience</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -1453,7 +1433,7 @@ leveraging technology to drive efficiency and innovation.
 <h3 class="text-xl font-bold text-gray-800">Moot Court Participant</h3>
 <h4 class="text-blue-600 mb-2">HS Mehta &amp; Associates | January 2025 – Present</h4>
 <p class="text-gray-600 mb-4">
-❖ Participated in moot court competitions simulating real-world tax and corporate litigation, where I honed my skills in legal interpretation, strategic argumentation, and persuasive communication — building a strong foundation for handling assessments, appeals, and client representation.
+❖ Participated in moot court competitions simulating real-world tax and corporate litigation, where I honed my skills in legal interpretation, strategic argumentation, and persuasive communication - building a strong foundation for handling assessments, appeals, and client representation.
 </p>
 <div class="mt-3 flex flex-wrap gap-2">
 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Litigation</span>
@@ -1540,7 +1520,7 @@ leveraging technology to drive efficiency and innovation.
 </div></div></section>
 <!-- Projects Section -->
 <section class="py-20 bg-gray-50" id="projects">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured <span class="gradient-text">Projects</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -1554,7 +1534,7 @@ technical skills to solve real-world business challenges.
 <div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-modal-description="Defended a case on disallowance on carry forward of losses due to amalgamation of two loss making companies through rigorous understanding of the provisions of Income Tax Act, 1961. This project honed my analytical skills, legal research abilities, and persuasive argumentation.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 <h4 class=&quot;text-lg font-semibold mb-2&quot;>Moot Court Simulation – Defending Amalgamation Revival Against Tax Avoidance Allegations</h4>
 
-<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing before CIT(A) — tested real-world advocacy skills in a controlled tribunal setting.</p>
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing before CIT(A) - tested real-world advocacy skills in a controlled tribunal setting.</p>
 
 <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
@@ -1587,7 +1567,7 @@ technical skills to solve real-world business challenges.
   <li >Legal Drafting & Oral Advocacy</li>
   <li >Cross-functional Reasoning</li>
 </ul>
-" data-modal-icon="fas fa-gavel" data-modal-icon-color="text-blue-600" data-modal-image="https://placehold.co/600x400/E0E7FF/3B82F6?text=Moot+Court+1" data-modal-tags="Income Tax,Teamwork,Analytics" data-modal-title="Moot Court Session 1" data-modal-type="project">
+" data-modal-icon="fas fa-gavel" data-modal-icon-color="text-blue-600" data-modal-tags="Income Tax,Teamwork,Analytics" data-modal-title="Moot Court Session 1" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
 <i class="fas fa-gavel text-5xl text-white"></i>
 </div>
@@ -1609,7 +1589,7 @@ technical skills to solve real-world business challenges.
 <div class="skill-card bg-white overflow-hidden fade-in cursor-pointer" data-aos="fade-up" data-aos-delay="100" data-modal-description="As a department representative, I debated on the setting of Arm’s Length Price and Transfer Pricing Adjustments under the Transfer Pricing provisions of Income Tax Act, 1961. This involved deep research into international tax laws and effective presentation skills.<hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 <h4 class=&quot;text-lg font-semibold mb-2&quot;>Moot Court Session – Transfer Pricing &amp; DTAA Litigation</h4>
 
-<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing on cross-border tax disputes — focused on transfer pricing adjustments and DTAA interpretation.</p>
+<p class=&quot;text-sm italic text-gray-600 mb-4&quot;>Simulated appellate hearing on cross-border tax disputes - focused on transfer pricing adjustments and DTAA interpretation.</p>
 
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
@@ -1620,7 +1600,7 @@ technical skills to solve real-world business challenges.
 
 <h4 class=&quot;text-md font-semibold mt-2 mb-1&quot;>Context:</h4>
 <p>Presented departmental arguments in a high-stakes simulated case involving cross-border transactions between an Indian entity (MIPL) and its associated enterprise in Germany, USA, and UAE. The core issues involved Transfer Pricing adjustments, downward profit shifts, and treaty misuse under DTAA.</p>
-<p>I was promoted as the session coordinator for my team in this second moot court session — entrusted with leading the preparation and coordinating the strategy for our side.</p>
+<p>I was promoted as the session coordinator for my team in this second moot court session - entrusted with leading the preparation and coordinating the strategy for our side.</p>
 
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
@@ -1652,7 +1632,7 @@ technical skills to solve real-world business challenges.
 </ul>
 
 <p class=&quot;text-sm italic mt-3&quot;>&quot;This session sharpened my understanding of real-world TP litigation and reinforced the interplay between facts, finance, and international tax law.&quot;</p>
-" data-modal-icon="fas fa-balance-scale" data-modal-icon-color="text-green-600" data-modal-image="https://placehold.co/600x400/D1FAE5/10B981?text=Moot+Court+2" data-modal-tags="Income Tax,Leadership,Transfer Pricing" data-modal-title="Moot Court Session 2 (Co-ordinator)" data-modal-type="project">
+" data-modal-icon="fas fa-balance-scale" data-modal-icon-color="text-green-600" data-modal-tags="Income Tax,Leadership,Transfer Pricing" data-modal-title="Moot Court Session 2 (Co-ordinator)" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-green-400 to-teal-500 flex items-center justify-center">
 <i class="fas fa-balance-scale text-5xl text-white"></i>
 </div>
@@ -1709,8 +1689,8 @@ technical skills to solve real-world business challenges.
 
 <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
-&lt;p class=&quot;text-sm italic mt-3&quot;&gt;&quot;This was my third moot court session, and I was again the &lt;strong&gt;Session Coordinator&lt;/strong&gt;—an opportunity to lead my team, strategize legal arguments, and present before senior experts with clarity and confidence.&quot;&lt;/p&gt;
-" data-modal-icon="fas fa-project-diagram" data-modal-icon-color="text-amber-600" data-modal-image="https://placehold.co/600x400/FFEFD5/FFA500?text=Moot+Court+3" data-modal-tags="Income Tax,Leadership,Search &amp; Seizure" data-modal-title="Moot Court Session 3 (Co-ordinator)" data-modal-type="project">
+&lt;p class=&quot;text-sm italic mt-3&quot;&gt;&quot;This was my third moot court session, and I was again the &lt;strong&gt;Session Coordinator&lt;/strong&gt;-an opportunity to lead my team, strategize legal arguments, and present before senior experts with clarity and confidence.&quot;&lt;/p&gt;
+" data-modal-icon="fas fa-project-diagram" data-modal-icon-color="text-amber-600" data-modal-tags="Income Tax,Leadership,Search &amp; Seizure" data-modal-title="Moot Court Session 3 (Co-ordinator)" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center">
 <i class="fas fa-project-diagram text-5xl text-white"></i>
 </div>
@@ -1737,7 +1717,7 @@ technical skills to solve real-world business challenges.
 
 <p><strong>Tech Stack:</strong> Python, Selenium, xlwings, Excel, Tkinter</p>
 
-<p><strong>Project Objective:</strong> Automate a high-volume, error-prone compliance task using browser automation and Excel-based workflow control — eliminating the need for manual logins, navigation, and file handling.</p>
+<p><strong>Project Objective:</strong> Automate a high-volume, error-prone compliance task using browser automation and Excel-based workflow control - eliminating the need for manual logins, navigation, and file handling.</p>
 
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
@@ -1762,7 +1742,7 @@ technical skills to solve real-world business challenges.
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
 <p class=&quot;text-sm italic mt-3&quot;>&quot;This project showcases my ability to solve operational challenges through smart automation, combining precision with practical compliance insights.&quot;</p>
-" data-modal-icon="fas fa-download" data-modal-icon-color="text-red-600" data-modal-image="https://placehold.co/600x400/FFD1DC/FF0000?text=SpeedB+3.0" data-modal-tags="Python,Automation,GST,Efficiency" data-modal-title="SpeedB 3.0" data-modal-type="project">
+" data-modal-icon="fas fa-download" data-modal-icon-color="text-red-600" data-modal-tags="Python,Automation,GST,Efficiency" data-modal-title="SpeedB 3.0" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-red-400 to-pink-500 flex items-center justify-center">
 <i class="fas fa-download text-5xl text-white"></i>
 </div>
@@ -1790,7 +1770,7 @@ technical skills to solve real-world business challenges.
 
 <p><strong>Tech Stack:</strong> Python, Selenium, Excel (OpenPyXL), Tkinter</p>
 
-<p><strong>Project Objective:</strong> Build a reliable automation layer over the GST portal to reduce errors, save time, and simplify the tax challan creation process — especially useful during high-pressure filing days.</p>
+<p><strong>Project Objective:</strong> Build a reliable automation layer over the GST portal to reduce errors, save time, and simplify the tax challan creation process - especially useful during high-pressure filing days.</p>
 
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
@@ -1813,8 +1793,8 @@ technical skills to solve real-world business challenges.
 
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
-<p class=&quot;text-sm italic mt-3&quot;>&quot;AutoChallanX reflects my approach to building precise, user-friendly tools that address operational pain points in compliance workflows — with accuracy and efficiency at the core.&quot;</p>
-" data-modal-icon="fas fa-robot" data-modal-icon-color="text-purple-600" data-modal-image="https://placehold.co/600x400/E6E6FA/800080?text=AutoChallanX" data-modal-tags="Python,Automation,GST,Accuracy" data-modal-title="AutoChallanX" data-modal-type="project">
+<p class=&quot;text-sm italic mt-3&quot;>&quot;AutoChallanX reflects my approach to building precise, user-friendly tools that address operational pain points in compliance workflows - with accuracy and efficiency at the core.&quot;</p>
+" data-modal-icon="fas fa-robot" data-modal-icon-color="text-purple-600" data-modal-tags="Python,Automation,GST,Accuracy" data-modal-title="AutoChallanX" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-purple-400 to-indigo-500 flex items-center justify-center">
 <i class="fas fa-robot text-5xl text-white"></i>
 </div>
@@ -1867,7 +1847,7 @@ technical skills to solve real-world business challenges.
  <hr style=&quot;margin: 1rem 0; background: #00A6ED; height: 2px;&quot;>
 
 <p class=&quot;text-sm italic mt-3&quot;>&quot;This project highlights my ability to identify friction points in day-to-day compliance workflows and address them with smart, practical automation solutions.&quot;</p>
-" data-modal-icon="fas fa-network-wired" data-modal-icon-color="text-cyan-600" data-modal-image="https://placehold.co/600x400/B2EBF2/00BCD4?text=GST+Verifier" data-modal-tags="Python,Automation,GST,API" data-modal-title="GST Verifier" data-modal-type="project">
+" data-modal-icon="fas fa-network-wired" data-modal-icon-color="text-cyan-600" data-modal-tags="Python,Automation,GST,API" data-modal-title="GST Verifier" data-modal-type="project">
 <div class="h-48 bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
 <i class="fas fa-network-wired text-5xl text-white"></i>
 </div>
@@ -1890,7 +1870,7 @@ technical skills to solve real-world business challenges.
 </section>
 <!-- LinkedIn Section -->
 <section class="py-20 bg-white" id="LinkedIn">
-<div class="container mx-auto px-4 max-w-6xl">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4 max-w-6xl">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">LinkedIn <span class="gradient-text">Posts</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -1909,7 +1889,7 @@ technical skills to solve real-world business challenges.
 </section>
 <!-- Endorsements Section (New) -->
 <section class="py-20 bg-gray-50" id="endorsements">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">Endorsements &amp; <span class="gradient-text">Testimonials</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -1921,25 +1901,28 @@ technical skills to solve real-world business challenges.
 <div class="endorsement-track flex">
 <!-- Endorsement Item 1 -->
 <div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
-<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-blue-200" src="https://placehold.co/100x100/A0D0E0/007bff?text=Client+1"/>
-<p class="text-lg text-gray-700 italic mb-4">"Soham is an incredibly diligent and insightful professional. His dedication to understanding complex tax laws and his ability to propose practical solutions truly set him apart. A valuable asset to any team!"</p>
-<h4 class="font-bold text-gray-800">Ms. Jane Doe</h4>
-<p class="text-sm text-gray-500">Senior Accountant, ABC Corp</p>
-</div>
+<a href="https://www.linkedin.com/in/vinayhirawat?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3ByXsTPJWjTfCVmr5UDCFgAQ%3D%3D" rel="noopener noreferrer" target="_blank">
+  <img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-blue-200" src="Vinay Profile photo edited.jpg"/>
+<p class="text-lg text-gray-700 italic mb-4">"I had the pleasure of working with Soham during Moot Court Sessions, where his sharp intellect and exceptional problem-solving abilities consistently stood out. His collaborative approach and commitment to teamwork greatly contributed to achieving impactful outcomes. Working with him has always been both productive and inspiring."</p>
+<h4 class="font-bold text-gray-800">Vinay Hirawat</h4>
+<p class="text-sm text-gray-500">Artice Assistant | RSM India</p>
+</a></div>
 <!-- Endorsement Item 2 -->
 <div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
-<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-green-200" src="https://placehold.co/100x100/D0E0A0/28a745?text=Client+2"/>
-<p class="text-lg text-gray-700 italic mb-4">"Working with Soham on our recent compliance project was a breeze. His attention to detail and proactive approach ensured everything was handled smoothly and efficiently. Highly recommend!"</p>
-<h4 class="font-bold text-gray-800">Mr. John Smith</h4>
-<p class="text-sm text-gray-500">Operations Manager, XYZ Ltd.</p>
-</div>
+<a href="https://www.linkedin.com/in/cma-bhavik-patel-6aa790109?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B1b9hp0RRRe2RuUyGC29QtQ%3D%3D" rel="noopener noreferrer" target="_blank">
+<img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-green-200" src="Bhavik Sir Profile Photo.jpg"/>
+<p class="text-lg text-gray-700 italic mb-4">"Soham stands as a dedicated CA Final aspirant whose work reflects clarity of thought, depth of knowledge, and respect for professional values. His portfolio reveals not only technical mastery but a sincere promise to serve with diligence and integrity. I hold every confidence that his journey shall bring honour and value to all he associates with."</p>
+<h4 class="font-bold text-gray-800">CMA Bhavik Mathukiya</h4>
+<p class="text-sm text-gray-500">Head of Finance and Taxation | Raj Patel & Associates</p>
+</a></div>
 <!-- Endorsement Item 3 -->
 <div class="endorsement-item flex-shrink-0 w-full p-8 bg-white rounded-lg shadow-lg text-center card">
+<a href="https://www.linkedin.com/in/kathan-trivedi-234455218?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BTHPnr0PqQu20W9fz7g06Iw%3D%3D" rel="noopener noreferrer" target="_blank">
 <img alt="Endorser Name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-purple-200" src="Kathan Profile photo.jpg"/>
 <p class="text-lg text-gray-700 italic mb-4">"As a friend and colleague, working with Soham has been both a learning and inspiring experience. His professional approach, clarity in thought, and dedication to the field of Chartered Accountancy have always stood out. Over time, I’ve not only shared knowledge but also gained valuable insights from him that have helped me grow personally and professionally"</p>
 <h4 class="font-bold text-gray-800">Kathan Trivedi</h4>
-<p class="text-sm text-gray-500">CA Aspirant, Raj Patel & Associates</p>
-</div>
+<p class="text-sm text-gray-500">CA Aspirant | Raj Patel & Associates</p>
+</a></div>
 </div>
 <!-- Slider Dots -->
 <div class="flex justify-center mt-6 space-x-2">
@@ -1952,7 +1935,7 @@ technical skills to solve real-world business challenges.
 </section>
 <!-- Contact Section -->
 <section class="py-20 bg-gray-50" id="contact">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="text-center mb-16" data-aos="fade-up">
 <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="gradient- text">Touch</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"></div>
@@ -1988,16 +1971,21 @@ If you’re interested in working together, discussing ideas, or just want to sa
 <div class="mt-8">
 <h4 class="font-bold text-gray-800 mb-4">Connect With Me</h4>
 <div class="flex space-x-4">
-<a class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B59P10I1jRweR6NX7%2FqyNdA%3D%3D">
+<a class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 hover:text-white transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B59P10I1jRweR6NX7%2FqyNdA%3D%3D" rel="noopener noreferrer" target="_blank" onclick="gtag('event', 'linkedin_click', { 'event_category': 'Outbound Link', 'event_label': 'LinkedIn Profile' });">
 <i class="fab fa-linkedin-in"></i>
 </a>
 <a href="mailto:sohampokar810@gmail.com" rel="noopener noreferrer" target="_blank"
-   class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition animated-icon">
+   class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 hover:text-white transition animated-icon">
   <i class="fas fa-envelope text-xl"></i>
 </a>
-
 </div>
 </div>
+</div>
+<!-- Styled Visitor Counter Badge -->
+<div class="flex justify-center mt-6">
+  <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm shadow-lg backdrop-blur-sm" id="visitor-count">
+    Loading visitor count...
+  </div>
 </div>
 </div>
 <div class="md:w-1/2 fade-in" data-aos="fade-left">
@@ -2037,14 +2025,14 @@ Send Message
 </section>
 <!-- Footer -->
 <footer class="bg-gray-900 text-white py-10">
-<div class="container mx-auto px-4">
+<div class="container max-w-screen-xl mx-auto mx-auto px-4">
 <div class="flex flex-col md:flex-row justify-between items-center">
 <div class="mb-6 md:mb-0">
 <h2 class="text-2xl font-bold gradient-text">Soham Patel</h2>
 <p class="text-gray-400 mt-2">CA Finalist &amp; Tech Enthusiast</p>
 </div>
 <div class="flex space-x-6">
-<a class="text-gray-400 hover:text-white transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEKY%2Bs7OVSOSSJ9bmnBEG%2FQ%3D%3D">
+<a class="text-gray-400 hover:text-white transition animated-icon" href="https://www.linkedin.com/in/soham-patel-1695aa27b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEKY%2Bs7OVSOSSJ9bmnBEG%2FQ%3D%3D" rel="noopener noreferrer" target="_blank" onclick="gtag('event', 'linkedin_click', { 'event_category': 'Outbound Link', 'event_label': 'LinkedIn Profile' });">
 <i class="fab fa-linkedin-in"></i>
 </a>
 <a href="mailto:sohampokar810@gmail.com" rel="noopener noreferrer" target="_blank"
@@ -2075,23 +2063,24 @@ Send Message
 <i class="fas fa-arrow-up"></i>
 </button>
 <!-- Modal Structure (Hidden by default) -->
-<div class="modal-overlay" id="infoModal">
-<div class="modal-content">
-<button class="modal-close-button" id="closeModal">×</button>
-<div class="flex items-center mb-4">
-<div class="hexagon p-3 mr-4" id="modal-icon-container">
-<i class="text-2xl" id="modal-icon"></i>
-</div>
-<h3 class="text-2xl font-bold text-gray-800" id="modal-title"></h3>
-</div>
-<img alt="Project Image" class="w-full h-48 object-cover rounded-md mb-4 hidden" id="modal-image" src=""/>
-<p class="text-gray-700 mb-4" id="modal-description"></p>
-<div class="flex flex-wrap gap-2 mb-4" id="modal-tags"></div>
-<!-- Optional: Add project links here if needed -->
-<!-- <a id="modal-project-link" href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center mt-4 hidden">
-            View Live Demo <i class="fas fa-external-link-alt ml-2"></i>
-        </a> -->
-</div>
+<div id="infoModal" class="modal-overlay hidden">
+  <div class="modal-content">
+    <button id="modalCloseButton" class="modal-close-button" aria-label="Close modal">×</button>
+    <div class="flex items-center mb-4">
+      <div id="modal-icon-container" class="hexagon p-3 mr-4">
+        <i id="modal-icon" class="text-2xl"></i>
+      </div>
+      <h3 id="modal-title-text" class="text-2xl font-bold text-gray-800"></h3>
+    </div>
+    <img id="modal-image" src="" alt="Project Image" class="w-full h-48 object-cover rounded-md mb-4 hidden" />
+    <div id="modal-description-content" class="text-gray-700 mb-4"></div>
+    <div id="modal-tags-container" class="flex flex-wrap gap-2 mb-4"></div>
+    <div class="flex justify-center mt-6">
+      <button id="modalFooterCloseButton" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800 transition">
+        Close
+      </button>
+    </div>
+  </div>
 </div>
 <!-- AOS (Animate On Scroll) JS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -2270,30 +2259,36 @@ Send Message
         });
     });
 
-    /* Modal Logic */
+  /* --- Modal Logic --- */
     const infoModal = document.getElementById('infoModal');
-    const closeModalButton = document.getElementById('closeModal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalTags = document.getElementById('modal-tags');
+    const modalCloseButton = document.getElementById('modalCloseButton');
+    const modalFooterCloseButton = document.getElementById('modalFooterCloseButton');
+
+    const modalTitle = document.getElementById('modal-title-text');
+    const modalDescription = document.getElementById('modal-description-content');
+    const modalTags = document.getElementById('modal-tags-container');
     const modalIcon = document.getElementById('modal-icon');
     const modalIconContainer = document.getElementById('modal-icon-container');
     const modalImage = document.getElementById('modal-image');
-    // const modalProjectLink = document.getElementById('modal-project-link'); // If you add project links
 
-    // Open Modal Function
-    function openModal(title, description, tags, iconClass, iconColor, imageUrl, projectLink) {
+    // --- Close Modal Function ---
+    function closeModal() {
+        infoModal.classList.remove('open');
+        infoModal.classList.add('hidden'); // Hide it again
+        document.body.style.overflow = 'auto'; // Restore background scrolling
+    }
+
+    // --- Open Modal Function ---
+    function openModal(title, description, tags, iconClass, iconColor, imageUrl) {
         modalTitle.textContent = title;
         modalDescription.innerHTML = description;
-        document.body.style.overflow = 'hidden';
-
-        // Clear existing tags
+        
+        // Clear and rebuild tags
         modalTags.innerHTML = '';
         if (tags) {
             tags.split(',').forEach(tagText => {
                 const span = document.createElement('span');
                 span.textContent = tagText.trim();
-                // Dynamically assign tag styles based on icon color for thematic consistency
                 let tagBgClass = 'bg-blue-100';
                 let tagTextColor = 'text-blue-800';
                 if (iconColor.includes('indigo')) {
@@ -2315,79 +2310,60 @@ Send Message
                     tagBgClass = 'bg-amber-100';
                     tagTextColor = 'text-amber-800';
                 }
-
-
                 span.className = `px-3 py-1 ${tagBgClass} ${tagTextColor} rounded-full text-sm`;
                 modalTags.appendChild(span);
             });
         }
-
+        
         // Update icon
         modalIcon.className = iconClass;
-        modalIconContainer.className = `hexagon p-3 mr-4 ${iconColor.replace('text-', 'bg-').replace('-600', '-100').replace('-500', '-100')}`; // Set background color for hexagon
+        modalIconContainer.className = `hexagon p-3 mr-4 ${iconColor.replace('text-', 'bg-').replace('-600', '-100').replace('-500', '-100')}`;
 
-        // Handle image for projects
+        // Handle image visibility
         if (imageUrl) {
             modalImage.src = imageUrl;
             modalImage.classList.remove('hidden');
         } else {
+            modalImage.src = '';
             modalImage.classList.add('hidden');
-            modalImage.src = ''; // Clear src
         }
 
-        // Handle project link (if implemented in modal)
-        // if (projectLink) {
-        //     modalProjectLink.href = projectLink;
-        //     modalProjectLink.classList.remove('hidden');
-        // } else {
-        //     modalProjectLink.classList.add('hidden');
-        // }
-
+        infoModal.classList.remove('hidden');
         infoModal.classList.add('open');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 
-    // Close Modal Function
-    function closeModal() {
-        infoModal.classList.remove('open');
-        document.body.style.overflow = ''; // Restore scrolling
-    }
-
-    // Event listeners for opening modal on skill cards (whole card clickable)
-    document.querySelectorAll('.skill-card').forEach(card => {
+    // --- Event Listeners to Open Modals ---
+    document.querySelectorAll('.skill-card, .card[data-modal-type="project"]').forEach(card => {
         card.addEventListener('click', () => {
             const title = card.getAttribute('data-modal-title');
             const description = card.getAttribute('data-modal-description');
             const tags = card.getAttribute('data-modal-tags');
             const iconClass = card.getAttribute('data-modal-icon');
             const iconColor = card.getAttribute('data-modal-icon-color');
-            openModal(title, description, tags, iconClass, iconColor);
+            const imageUrl = card.getAttribute('data-modal-image'); // This will be null for skill cards, which is fine
+            openModal(title, description, tags, iconClass, iconColor, imageUrl);
         });
     });
 
-    // Event listeners for opening modal on project cards (whole card clickable)
-    document.querySelectorAll('.card[data-modal-type="project"]').forEach(card => {
-        card.addEventListener('click', () => {
-            const title = card.getAttribute('data-modal-title');
-            const description = card.getAttribute('data-modal-description');
-            const tags = card.getAttribute('data-modal-tags');
-            const imageUrl = card.getAttribute('data-modal-image');
-            const iconClass = card.getAttribute('data-modal-icon');
-            const iconColor = card.getAttribute('data-modal-icon-color');
-            const projectLink = card.getAttribute('data-modal-link'); // If you add a dedicated link attribute
-
-            openModal(title, description, tags, iconClass, iconColor, imageUrl, projectLink);
-        });
-    });
-
-    // Event listener for closing modal
-    closeModalButton.addEventListener('click', closeModal);
-    infoModal.addEventListener('click', (e) => {
-        if (e.target === infoModal) { // Close when clicking outside modal content
+    // --- Event Listeners to Close Modals ---
+    // Top 'X' button
+    modalCloseButton.addEventListener('click', closeModal);
+    // ✅ Footer 'Close' button
+    modalFooterCloseButton.addEventListener('click', closeModal);
+    // Clicking on the background overlay
+    infoModal.addEventListener('click', (event) => {
+        if (event.target === infoModal) {
             closeModal();
         }
     });
-
+    // --- Event Listener for the Escape Key ---
+    document.addEventListener('keydown', (event) => {
+        // Check if the modal is open and the key pressed was 'Escape'
+        if (!infoModal.classList.contains('hidden') && event.key === 'Escape') {
+            closeModal(); // If so, close the modal
+        }
+    });
     /* Endorsement Slider Logic */
     const endorsementTrack = document.querySelector('.endorsement-track');
     const endorsementItems = document.querySelectorAll('.endorsement-item');
@@ -2421,83 +2397,13 @@ Send Message
             nextIndex = 0;
         }
         updateEndorsementSlider(nextIndex);
-    }, 5000); // Change slide every 5 seconds
+    }, 8000); // Change slide every 8 seconds
 
     // Initialize first endorsement
     updateEndorsementSlider(0);
 
   }); // End DOMContentLoaded
-
-  // Get all the necessary DOM elements
-        const projectCard = document.getElementById('projectCard');
-        const projectModal = document.getElementById('projectModal');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalContent = document.getElementById('modalContent');
-        const closeModalBtn = document.getElementById('closeModal');
-        const closeModalFooterBtn = document.getElementById('closeModalFooter');
-
-        // Function to open the modal with animation
-        const openModal = () => {
-            if (projectModal) {
-                projectModal.classList.remove('hidden');
-                // We use requestAnimationFrame to ensure the display property has changed
-                // before we start the transition.
-                requestAnimationFrame(() => {
-                    modalOverlay.classList.remove('opacity-0');
-                    modalOverlay.classList.add('opacity-100');
-                    modalContent.classList.remove('opacity-0', 'scale-95', '-translate-y-4');
-                    modalContent.classList.add('opacity-100', 'scale-100', 'translate-y-0');
-                });
-                // Prevent background from scrolling
-                document.body.style.overflow = 'hidden';
-            }
-        };
-
-        // Function to close the modal with animation
-        const closeModal = () => {
-            if (projectModal) {
-                modalOverlay.classList.add('opacity-0');
-                modalOverlay.classList.remove('opacity-100');
-                modalContent.classList.add('opacity-0', 'scale-95', '-translate-y-4');
-                modalContent.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
-
-                // Wait for the transition to finish before hiding the modal
-                setTimeout(() => {
-                    projectModal.classList.add('hidden');
-                     // Restore background scrolling
-                    document.body.style.overflow = '';
-                }, 300); // This duration should match your CSS transition duration
-                
-            }
-        };
-
-        // Event Listeners
-        // Click on the card to open the modal
-        if (projectCard) {
-            projectCard.addEventListener('click', openModal);
-        }
-
-        // Click on the close button (X) to close the modal
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', closeModal);
-        }
-
-        // Click on the footer close button
-        if(closeModalFooterBtn) {
-            closeModalFooterBtn.addEventListener('click', closeModal);
-        }
-
-        // Click on the overlay (outside the modal content) to close it
-        if (modalOverlay) {
-            modalOverlay.addEventListener('click', closeModal);
-        }
-        
-        // Press the 'Escape' key to close the modal
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && !projectModal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
+      
         // Scroll progress bar logic
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
@@ -2563,7 +2469,24 @@ document.querySelectorAll('.category-tab').forEach(tab => {
   });
 });
 
-
+  fetch("https://api.counterapi.dev/v1/casohampatelportfolio/visitor/up", {
+    method: "POST"
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log("API Response:", data); // For debugging
+      const count = data.count;
+      if (typeof count === "number") {
+        document.getElementById("visitor-count").innerHTML =
+          `You are visitor <span class="font-bold text-indigo-300">#${count}</span>`;
+      } else {
+        document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
+      }
+    })
+    .catch(error => {
+      console.error("Visitor counter error:", error);
+      document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
+    });
 
 </script>
 </body>
