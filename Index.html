@@ -2473,7 +2473,8 @@ document.querySelectorAll('.category-tab').forEach(tab => {
     method: "POST",
     headers: {
       'Content-Type': 'application/json' // Explicitly set content type
-    }
+    },
+    body: JSON.stringify({}) // Send an empty JSON object as the body
   })
     .then(response => response.json())
     .then(data => {
