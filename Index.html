@@ -2470,7 +2470,10 @@ document.querySelectorAll('.category-tab').forEach(tab => {
 });
 
   fetch("https://api.counterapi.dev/v1/casohampatelportfolio/visitor/up", {
-    method: "POST"
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json' // Explicitly set content type
+    }
   })
     .then(response => response.json())
     .then(data => {
