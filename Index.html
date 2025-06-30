@@ -1981,12 +1981,6 @@ If you’re interested in working together, discussing ideas, or just want to sa
 </div>
 </div>
 </div>
-<!-- Styled Visitor Counter Badge -->
-<div class="flex justify-center mt-6">
-  <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm shadow-lg backdrop-blur-sm" id="visitor-count">
-    Loading visitor count...
-  </div>
-</div>
 </div>
 <div class="md:w-1/2 fade-in" data-aos="fade-left">
 <div class="bg-white p-8 rounded-lg shadow-sm card">
@@ -2468,29 +2462,6 @@ document.querySelectorAll('.category-tab').forEach(tab => {
     });
   });
 });
-
-  fetch("https://api.counterapi.dev/v1/casohampatelportfolio/visitor/up", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json' // Explicitly set content type
-    },
-    body: JSON.stringify({}) // Send an empty JSON object as the body
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log("API Response:", data); // For debugging
-      const count = data.count;
-      if (typeof count === "number") {
-        document.getElementById("visitor-count").innerHTML =
-          `You are visitor <span class="font-bold text-indigo-300">#${count}</span>`;
-      } else {
-        document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
-      }
-    })
-    .catch(error => {
-      console.error("Visitor counter error:", error);
-      document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
-    });
 
 </script>
 </body>
